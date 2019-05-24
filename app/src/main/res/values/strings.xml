@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">团队项目网络管理系统</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- 主页 -->
+    <string name="menu_project">项目</string>
+    <string name="menu_achievement">成果</string>
+    <string name="menu_search">查询</string>
+    <string name="menu_me">个人</string>
+</resources>

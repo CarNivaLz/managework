@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#1F1F1F"
+            android:textSize="26dp"
+            android:text="绿色网络关键技术研究"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="负责人:李明"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="项目进度:80%"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="人数:5人"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019.3.31"/>
+        </LinearLayout>
+        <View  android:layout_height="20px"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:background="#EBEBEB"
+            />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#1C1C1C"
+            android:text="项目简介"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="该项目重点研究并突破通信网络（包括终端、无线/有线接入网、核心网、传输网）端到端低能耗绿色网络架构演进和管理技术、面向新业务新终端的网络融合技术、绿色网络的系统技术，构造端到端的绿色节能网络示范网络和评价体系，积极推进产业化进程。"
+            android:textSize="18dp" />
+
+
+
+        <View  android:layout_height="20px"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:background="#EBEBEB"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:text="项目资料"
+            android:textColor="#1C1C1C"
+            android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:singleLine="false"
+                android:text="1.基于能效的单小区网络-用户联合资源分配
+2.同构蜂窝多小区系统网高能效资源优化分配
+3.异构蜂窝多小区系统高能效拓扑控制
+4.异构蜂窝多小区系统高能效接入控制技术"
+                android:textSize="16dp" />
+
+        <View  android:layout_height="20px"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:background="#EBEBEB"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:textColor="#1C1C1C"
+            android:text="项目成果"
+            />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:singleLine="false"
+            android:text="1.基于能效的单小区网络-用户联合资源分配
+2.同构蜂窝多小区系统网高能效资源优化分配
+3.异构蜂窝多小区系统高能效拓扑控制
+4.异构蜂窝多小区系统高能效接入控制技术"
+            android:textSize="16dp" />
+
+        <View  android:layout_height="20px"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:background="#EBEBEB"
+            />
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#1C1C1C"
+                android:text="项目动态"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+
+
+        <View  android:layout_height="1px"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:background="#CFCFCF"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comment_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+</ScrollView>
