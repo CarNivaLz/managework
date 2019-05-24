@@ -13,4 +13,15 @@
     <style name="tab_head" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
+
+
+    <!-- dialog-->
+    <style name="CheckBoxTintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/menu_gray</item>
+    </style>
+    <style name="EditTextTintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/menu_gray</item>
+    </style>
+
+
 </resources>

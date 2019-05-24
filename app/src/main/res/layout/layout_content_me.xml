@@ -19,7 +19,7 @@
             android:paddingBottom="8dp"
             android:paddingTop="8dp">
             <LinearLayout
-                android:id="@+id/ll_calendar"
+                android:id="@+id/me_project"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,7 +43,7 @@
                 android:layout_height="fill_parent"
                 android:background="@color/divider_line_color" />
             <LinearLayout
-                android:id="@+id/ll_constellation"
+                android:id="@+id/me_paper"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -67,7 +67,7 @@
                 android:layout_height="fill_parent"
                 android:background="@color/divider_line_color" />
             <LinearLayout
-                android:id="@+id/ll_scraw"
+                android:id="@+id/me_patent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -91,7 +91,7 @@
                 android:layout_height="fill_parent"
                 android:background="@color/divider_line_color" />
             <LinearLayout
-                android:id="@+id/ll_map"
+                android:id="@+id/me_copyright"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,7 +128,7 @@
             android:layout_marginRight="8dp"
             android:orientation="vertical">
             <RelativeLayout
-                android:id="@+id/rl_collection"
+                android:id="@+id/me_assessment"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -161,7 +161,7 @@
                 android:layout_height="1dp"
                 android:background="@color/divider_line_color" />
             <RelativeLayout
-                android:id="@+id/rl_setting"
+                android:id="@+id/me_setting"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"

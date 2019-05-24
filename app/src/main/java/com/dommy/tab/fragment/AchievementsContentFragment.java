@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dommy.tab.R;
 import com.dommy.tab.adapter.AchievementsListAdapter;
-import com.dommy.tab.adapter.ProjectsListAdapter;
 import com.dommy.tab.module.Achievements;
-import com.dommy.tab.module.Projects;
 import com.dommy.tab.ui.ProjectsDetailActivity;
 
 import java.util.ArrayList;
