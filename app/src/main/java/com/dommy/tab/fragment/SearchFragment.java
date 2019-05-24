@@ -2,6 +2,7 @@ package com.dommy.tab.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.dommy.tab.R;
+import com.dommy.tab.module.SearchResults;
+import com.dommy.tab.ui.ProjectsDetailActivity;
+import com.dommy.tab.ui.SearchResultsActivity;
 import com.fantasy.doubledatepicker.DoubleDateSelectDialog;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
@@ -28,7 +32,7 @@ import java.util.List;
  */
 public class SearchFragment extends Fragment implements View.OnClickListener {
 
-    private RelativeLayout s_time_sta, s_time_fin, s_name, s_member,s_category;
+    private RelativeLayout s_time_sta, s_time_fin, s_name, s_member,s_category,s_send;
     private View view;
     private String[] items = {"项目","论文","专利","著作权"};
 
@@ -62,6 +66,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         s_name = (RelativeLayout) v.findViewById(R.id.s_name);
         s_member = (RelativeLayout) v.findViewById(R.id.s_member);
         s_category = (RelativeLayout) v.findViewById(R.id.s_category);
+        s_send=(RelativeLayout) v.findViewById(R.id.s_send) ;
         setListener();
     }
 
@@ -71,12 +76,16 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         s_name.setOnClickListener(this);
         s_member.setOnClickListener(this);
         s_category.setOnClickListener(this);
+        s_send.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v){
         switch (v.getId()) {
+            case R.id.s_send:
+                startActivity(new Intent(getContext(),SearchResultsActivity.class));
+                break;
             case R.id.s_time_sta:
                 showCustomTimePicker();
             break;

@@ -4,7 +4,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dommy.tab.R;
 import com.dommy.tab.module.Achievements;
-import com.dommy.tab.module.Projects;
 
 import java.util.List;
 
