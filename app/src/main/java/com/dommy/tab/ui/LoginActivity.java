@@ -1,6 +1,7 @@
 package com.dommy.tab.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dommy.tab.MainActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.module.UserBean;
 import com.google.gson.Gson;
@@ -43,6 +45,14 @@ public class LoginActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        String flag = sharedPreferences.getString("haslogged", "");
+        if(flag.equals("true")){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        }
+
+
         setContentView(R.layout.activity_login);
 
         initView();
@@ -60,24 +70,7 @@ public class LoginActivity extends AppCompatActivity  {
         passwordInput=(EditText)findViewById(R.id.login_password);
     }
 
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        /**
-//         * 登录时先从数据库里面读取用户的用户名和密码
-//         *
-//         * 如果不为空则直接登录
-//         * */
-//        sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
-//        String name = sharedPreferences.getString("account", "");
-//        String code = sharedPreferences.getString("pass", "");
-//        if (name.length() > 1 && code.length() > 1) {
-//            et_login_userphone.setText(name);
-//            et_login_psw.setText(code);
-//            //login(); //执行登录的方法
-//        }
-//    }
+
 
     private class loginOnClickListener implements View.OnClickListener {
         @Override
@@ -88,10 +81,12 @@ public class LoginActivity extends AppCompatActivity  {
             if (usr_account.trim().length() > 0 && usr_password.trim().length() > 0) {
                 checkLogin(usr_account, usr_password);
             }else {
-                Toast.makeText(getApplicationContext(), " 请输入邮箱或密码", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), " 请输入账号或密码", Toast.LENGTH_LONG).show();
             }
         }
     }
+
+
 
     private void checkLogin(final String account, final String password){
         String tag_string_req = "req_login";
@@ -115,6 +110,12 @@ public class LoginActivity extends AppCompatActivity  {
                     Cookie cookie = builder.name("peopleId").value(userBean.getMsg()).domain(httpUrl.host()).build();
                     CookieStore cookieStore = OkGo.getInstance().getCookieJar().getCookieStore();
                     cookieStore.saveCookie(httpUrl, cookie);
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("haslogged", "true");
+                    editor.commit();
+
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 } else {
                     Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
                 }
