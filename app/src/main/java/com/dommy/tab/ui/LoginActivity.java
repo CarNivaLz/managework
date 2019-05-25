@@ -4,15 +4,20 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dommy.tab.BaseActivity;
 import com.dommy.tab.MainActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.module.UserBean;
+import com.dommy.tab.utils.AppManager;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -25,14 +30,15 @@ import okhttp3.HttpUrl;
 
 import static com.dommy.tab.utils.ApiConfig.URL_LOGIN;
 
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     private Button loginButton;
     private EditText accountInput;
     private EditText passwordInput;
     private SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
-
+    private TextView signup;
+    private long exitTime;
 
 
     @Override
@@ -60,31 +66,37 @@ public class LoginActivity extends AppCompatActivity  {
         progressDialog.setCancelable(false);
         //登录状态和数据库操作
         //跳转
-        loginButton.setOnClickListener(new loginOnClickListener());
-
+        loginButton.setOnClickListener(this);
+        signup.setOnClickListener(this);
     }
+
 
     public void initView(){
         loginButton=(Button)findViewById(R.id.btn_login);
         accountInput=(EditText)findViewById(R.id.login_account);
         passwordInput=(EditText)findViewById(R.id.login_password);
+        signup=(TextView)findViewById(R.id.quick_register);
+    }
+    @Override
+    public void onClick(View v){
+       switch (v.getId()){
+           case R.id.quick_register:
+               startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+               break;
+           case R.id.btn_login:
+               String usr_account = accountInput.getText().toString();
+               String usr_password = passwordInput.getText().toString();
+               //判断输入是否为空
+               if (usr_account.trim().length() > 0 && usr_password.trim().length() > 0) {
+                   checkLogin(usr_account, usr_password);
+               }else {
+                   Toast.makeText(getApplicationContext(), " 请输入账号或密码", Toast.LENGTH_LONG).show();
+               }
+               break;
+       }
     }
 
 
-
-    private class loginOnClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            String usr_account = accountInput.getText().toString();
-            String usr_password = passwordInput.getText().toString();
-            //判断输入是否为空
-            if (usr_account.trim().length() > 0 && usr_password.trim().length() > 0) {
-                checkLogin(usr_account, usr_password);
-            }else {
-                Toast.makeText(getApplicationContext(), " 请输入账号或密码", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 
 
 
@@ -135,8 +147,25 @@ public class LoginActivity extends AppCompatActivity  {
         if (progressDialog.isShowing()) {
             progressDialog.hide();
         }
+    }
 
-
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN
+                && event.getRepeatCount() == 0) {
+            // 重写键盘事件分发，onKeyDown方法某些情况下捕获不到，只能在这里写
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Snackbar snackbar = Snackbar.make(getCurrentFocus(), "再按一次退出程序", Snackbar.LENGTH_SHORT);
+                snackbar.getView().setBackgroundResource(R.color.colorPrimary);
+                snackbar.show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                AppManager.getAppManager().finishAllActivity();
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
 
 }

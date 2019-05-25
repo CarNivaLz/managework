@@ -1,0 +1,194 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/register_bg_color"
+    android:orientation="vertical">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/icon" />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/signup_invite"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/login_edittext_top"
+                android:drawableLeft="@drawable/signup_invite_pic"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:hint="请输入邀请码"
+                android:inputType="text"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="@color/register_hint_text_color"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_line_color" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/signup_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_edittext_bottom"
+                    android:drawableLeft="@drawable/signup_name_pic"
+                    android:drawablePadding="10dp"
+                    android:hint="请输入姓名"
+                    android:inputType="text"
+                    android:paddingLeft="8dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/register_hint_text_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_line_color" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/signup_account"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_edittext_bottom"
+                    android:drawableLeft="@drawable/login_account"
+                    android:drawablePadding="10dp"
+                    android:hint="请输入账号"
+                    android:inputType="text"
+                    android:paddingLeft="8dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/register_hint_text_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_line_color" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/signup_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_edittext_bottom"
+                    android:drawableLeft="@drawable/login_password"
+                    android:drawablePadding="10dp"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword"
+                    android:paddingLeft="8dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/register_hint_text_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_line_color" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/singup_grade"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_edittext_bottom"
+                    android:drawableLeft="@drawable/signup_grade_pic"
+                    android:drawablePadding="10dp"
+                    android:hint="请输入年级（研一、研二、研三、博士）"
+                    android:inputType="text"
+                    android:paddingLeft="8dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/register_hint_text_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/rg_sex"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/rb_Male"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="男" -->
+                        <!--/>-->
+
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/rb_FeMale"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="女" />-->
+                <!--</RadioGroup>-->
+              <!---->
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/login_btn_selector"
+        android:text="注册"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

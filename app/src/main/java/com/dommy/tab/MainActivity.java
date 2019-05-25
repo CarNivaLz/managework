@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dommy.tab.adapter.MainFragmentAdapter;
+import com.dommy.tab.ui.LoginActivity;
+import com.dommy.tab.utils.AppManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * 主框架
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     /**
      * 菜单标题
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private long exitTime;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         initPager();
 
         setTabs(tabLayout, getLayoutInflater(), TAB_TITLES, TAB_IMGS);
+
     }
+
 
     /**
      * 设置页卡显示效果
@@ -118,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 snackbar.show();
                 exitTime = System.currentTimeMillis();
             } else {
-                finish();
+                AppManager.getAppManager().finishAllActivity();
             }
             return true;
         }
