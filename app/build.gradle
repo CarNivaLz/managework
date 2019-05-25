@@ -42,4 +42,5 @@ dependencies {
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
     implementation 'com.github.darrenfantasy:DoubleDatePicker:1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.lzy.net:okgo:3.0.4'
 }
