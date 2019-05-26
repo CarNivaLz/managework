@@ -3,32 +3,20 @@ package com.dommy.tab.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dommy.tab.BaseActivity;
-import com.dommy.tab.MainActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.module.UserBean;
 import com.dommy.tab.utils.AppManager;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.cookie.store.CookieStore;
 import com.lzy.okgo.model.Response;
-
-import okhttp3.Cookie;
-import okhttp3.HttpUrl;
-
-import static com.dommy.tab.utils.ApiConfig.URL_LOGIN;
 import static com.dommy.tab.utils.ApiConfig.URL_SIGNUP;
 
 public class SignUpActivity extends BaseActivity implements View.OnClickListener {
@@ -39,7 +27,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     private EditText accountInput;
     private EditText passwordInput;
     private EditText gradeInput;
- 
+
 
     private ProgressDialog progressDialog;
     private long exitTime;
@@ -141,6 +129,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                         if (userBean.getCode()==1) {
 
                             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+
                         } else {
                             Toast.makeText(getApplicationContext(),userBean.getMsg(),Toast.LENGTH_LONG).show();
 
@@ -161,6 +150,12 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         if (progressDialog.isShowing()) {
             progressDialog.hide();
         }
+    }
+
+    @Override
+    public void onStop(){
+        AppManager.getAppManager().finishActivity(this);
+        super.onStop();
     }
 
 //    @Override
