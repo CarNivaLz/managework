@@ -101,7 +101,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
 
     private void checkLogin(final String account, final String password){
-        String tag_string_req = "req_login";
         progressDialog.setMessage("登陆中...");
         showDiaglog();
 
@@ -129,7 +128,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 } else {
-                    Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"密码错误",Toast.LENGTH_LONG).show();
                 }
             }
         });

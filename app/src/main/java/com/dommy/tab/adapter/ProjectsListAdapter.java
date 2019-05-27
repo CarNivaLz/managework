@@ -21,7 +21,7 @@ public class ProjectsListAdapter extends BaseQuickAdapter<Projects,BaseViewHolde
     protected void convert(BaseViewHolder helper, Projects item) {
         helper.setText(R.id.projects_tittle,item.getTittle())
                 .setText(R.id.projects_teacher,item.getTeacher())
-                .setText(R.id.projects_member_num,item.getMember_num())
+//                .setText(R.id.projects_member_num,item.getMember_num())
                 .setText(R.id.projects_time_start,item.getTime_start());
     }
 }

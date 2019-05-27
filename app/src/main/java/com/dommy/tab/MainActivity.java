@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.dommy.tab.adapter.MainFragmentAdapter;
 import com.dommy.tab.ui.LoginActivity;
 import com.dommy.tab.utils.AppManager;
+import com.lzy.okgo.OkGo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +49,12 @@ public class MainActivity extends BaseActivity {
      */
     private long exitTime;
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        OkGo.getInstance().cancelTag(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

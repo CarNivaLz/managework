@@ -54,7 +54,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private void initDatas() {
         //由name决定请求的项目状态类型
 
-        Results news1=new Results("1","这是专利","老师:南策名","成员：5人","2019.3.31");
+        Results news1=new Results("1","网络行为组织学研究","老师:南策名","成员：5人","2019.3.31");
         Results news2=new Results("2","绿色网络关键技术研究","老师:苏俊","成员：6人","2019.4.11");
         Results news3=new Results("3","信息传输分系统研制","老师:李明","成员：4人","2019.4.26");
         Results news4=new Results("4","车用无线自组织网络安全告警信息传输策略研究","老师:赵茜珊","成员：7人","2019.4.29");

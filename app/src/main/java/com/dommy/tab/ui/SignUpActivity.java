@@ -67,7 +67,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
 
     }
-@Override
+    @Override
     public void onClick(View v){
         if(v.getId()==R.id.btn_signup){
             String inviteCode = inviteCodeInput.getText().toString();
@@ -107,6 +107,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                 break;
                 default:
                     Toast.makeText(this,"请按正确格式填写年级：研一、研二、研三、博士！",Toast.LENGTH_LONG).show();
+                    break;
 
         }
         String tag_string_req = "req_login";
@@ -157,24 +158,5 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         AppManager.getAppManager().finishActivity(this);
         super.onStop();
     }
-
-//    @Override
-//    public boolean dispatchKeyEvent(KeyEvent event) {
-//        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK
-//                && event.getAction() == KeyEvent.ACTION_DOWN
-//                && event.getRepeatCount() == 0) {
-//            // 重写键盘事件分发，onKeyDown方法某些情况下捕获不到，只能在这里写
-//            if ((System.currentTimeMillis() - exitTime) > 2000) {
-//                Snackbar snackbar = Snackbar.make(getCurrentFocus(), "再按一次退出程序", Snackbar.LENGTH_SHORT);
-//                snackbar.getView().setBackgroundResource(R.color.colorPrimary);
-//                snackbar.show();
-//                exitTime = System.currentTimeMillis();
-//            } else {
-//                AppManager.getAppManager().finishAllActivity();
-//            }
-//            return true;
-//        }
-//        return super.dispatchKeyEvent(event);
-//    }
 
 }
