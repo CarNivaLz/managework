@@ -73,13 +73,13 @@ public class AchievementsContentFragment extends BaseFragment implements SwipeRe
 
     @Override
     protected void initData() {
-        progressDialog = new ProgressDialog(getContext());//进度条
-        progressDialog.setCancelable(false);
+//        progressDialog = new ProgressDialog(getContext());//进度条
+//        progressDialog.setCancelable(false);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         achievementsListAdapter = new AchievementsListAdapter(null);
-        achievementsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+//        achievementsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         achievementsListAdapter.isFirstOnly(false);
         recyclerView.setAdapter(achievementsListAdapter);
 
@@ -103,22 +103,22 @@ public class AchievementsContentFragment extends BaseFragment implements SwipeRe
         }
 
         //开启loading,获取数据
-        setRefreshing(true);
-        onRefresh();
+//        setRefreshing(true);
+//        onRefresh();
     }
 
     /** 下拉刷新 */
     @Override
     public void onRefresh() {
         progressDialog.setMessage("加载中...");
-        showDiaglog();
+//        showDiaglog();
         OkGo.<String>get(url)//
                 .cacheKey("TabFragment_" + name)       //由于该fragment会被复用,必须保证key唯一,否则数据会发生覆盖
                 .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)  //缓存模式先使用缓存,然后使用网络数据
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        hideDialog();
+//                        hideDialog();
                         List<Achievements> results = new Gson().fromJson(response.body(), new TypeToken<List<Achievements>>(){}.getType());
                         if (results != null) {
 //                            currentPage = 2;

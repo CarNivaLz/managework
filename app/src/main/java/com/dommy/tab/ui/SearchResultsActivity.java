@@ -1,26 +1,22 @@
 package com.dommy.tab.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dommy.tab.BaseActivity;
 import com.dommy.tab.R;
-import com.dommy.tab.adapter.ProjectsListAdapter;
 import com.dommy.tab.adapter.SearchResultListAdapter;
-import com.dommy.tab.module.Achievements;
 import com.dommy.tab.module.Results;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
@@ -28,13 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.dommy.tab.utils.ApiConfig.URL_SEARCH;
 
 
 public class SearchResultsActivity extends BaseActivity {
 
-    @BindView(R.id.result_recycle) RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     List<Results> resultsList =new ArrayList<>();
     private SearchResultListAdapter searchResultListAdapter;
     private ProgressDialog progressDialog;
@@ -45,12 +42,13 @@ public class SearchResultsActivity extends BaseActivity {
     private String input_member;
     private ArrayList<Integer> input_category;
 
-
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_search_result);
+        recyclerView=(RecyclerView)findViewById(R.id.result_recycle);
 //        intent.putExtra("date_s", input_date_sta);
 //        intent.putExtra("date_f",input_date_fin);
 //        intent.putExtra("name",input_name);
@@ -76,19 +74,19 @@ public class SearchResultsActivity extends BaseActivity {
 
 
     private void initDatas() {
-        progressDialog = new ProgressDialog(getApplicationContext());//进度条
-        progressDialog.setCancelable(false);
+//        progressDialog = new ProgressDialog(getApplicationContext());//进度条
+//        progressDialog.setCancelable(false);
         String cat_num="";
         for (Integer i:input_category){
             cat_num="&type="+i;
         }
-        showDiaglog();
+//        showDiaglog();
         OkGo.<String>get(URL_SEARCH+"?"+"people_name="+input_member+"&startTime="+input_date_sta+"&endTime="+input_date_fin+cat_num)//
                 .tag(this)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        hideDialog();
+//                        hideDialog();
                         List<Results> results = new Gson().fromJson(response.body(), new TypeToken<List<Results>>(){}.getType());
                         if (results != null) {
 //                            currentPage = 2;

@@ -8,4 +8,5 @@ public class ApiConfig {
     public static String URL_ACHIEVEMENT_PATENT = "http://120.78.151.240:8080/allPatent";
     public static String URL_Achievements_COPYRIGHT = "http://120.78.151.240:8080/allCopyright";
     public static String URL_SEARCH =  "http://120.78.151.240:8080/search";
+    public static String URL_MYPROJECT = "http://120.78.151.240:8080/myProjectList";
 }

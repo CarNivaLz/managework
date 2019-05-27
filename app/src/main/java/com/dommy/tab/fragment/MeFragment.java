@@ -1,7 +1,6 @@
 package com.dommy.tab.fragment;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,9 +11,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.dommy.tab.MainActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.ui.LoginActivity;
+import com.dommy.tab.ui.MyAssessmentsActivity;
+import com.dommy.tab.ui.MyCopytightsActivity;
+import com.dommy.tab.ui.MyPapersActivity;
+import com.dommy.tab.ui.MyPatentsActivity;
+import com.dommy.tab.ui.MyProjectsActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -71,6 +74,21 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             onDetach();
             break;
 
+        case R.id.me_project:
+            startActivity(new Intent(getContext(),MyProjectsActivity.class));
+            break;
+        case R.id.me_paper:
+            startActivity(new Intent(getContext(),MyPapersActivity.class));
+            break;
+        case R.id.me_patent:
+            startActivity(new Intent(getContext(),MyPatentsActivity.class));
+            break;
+        case R.id.me_copyright:
+            startActivity(new Intent(getContext(),MyCopytightsActivity.class));
+            break;
+        case R.id.me_assessment:
+            startActivity(new Intent(getContext(),MyAssessmentsActivity.class));
+            break;
         }
     }
     @Override

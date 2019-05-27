@@ -89,7 +89,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v){
         switch (v.getId()) {
             case R.id.s_send:
-                if(input_date_fin==null&&input_date_sta==null&&input_name==null&&input_member==null&&input_category.size()==0&&input_category==null){
+                if(input_date_fin==null&&input_date_sta==null&&input_name==null&&input_member==null&&input_category.size()==0){
+
                     Toast.makeText(getContext(),"请先输入查询信息",Toast.LENGTH_SHORT).show();
                 }else {
                     Intent intent = new Intent(getContext(), SearchResultsActivity.class);
