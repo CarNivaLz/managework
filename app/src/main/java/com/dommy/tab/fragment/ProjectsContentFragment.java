@@ -1,11 +1,13 @@
 package com.dommy.tab.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,18 +16,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.dommy.tab.MainActivity;
+import com.dommy.tab.BaseFragment;
 import com.dommy.tab.R;
 import com.dommy.tab.adapter.ProjectsListAdapter;
 import com.dommy.tab.module.Projects;
-import com.dommy.tab.module.UserBean;
-import com.dommy.tab.ui.LoginActivity;
-import com.dommy.tab.ui.ProjectsDetailActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.cookie.store.CookieStore;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
@@ -33,23 +32,123 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Cookie;
-import okhttp3.HttpUrl;
 
-import static com.dommy.tab.utils.ApiConfig.URL_LOGIN;
-import static com.dommy.tab.utils.ApiConfig.URL_Projects;
+import static com.dommy.tab.utils.ApiConfig.URL_PROJECT;
 
 
-public class ProjectsContentFragment extends Fragment {
+public class ProjectsContentFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    @BindView(R.id.refreshLayout) SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.projects_recycle) RecyclerView recyclerView;
 
-    @BindView(R.id.projects_recycle)
-    RecyclerView recyclerView;
-    int flag=0;
+    private Context context;
+    private ProjectsListAdapter projectsListAdapter;
+    private boolean isInitCache = false;
+    public static ProjectsContentFragment newInstance() {
+        return new ProjectsContentFragment();
+    }
+
     private String name;
     List<Projects> projectsItemList =new ArrayList<>();
     private String request_status;
     private ProgressDialog progressDialog;
+
+    @Override
+    public void onAttach(Context context) {
+        this.context = context;
+        super.onAttach(context);
+    }
+
+    @Override
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_projects_content, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    protected void initData() {
+        progressDialog = new ProgressDialog(getContext());//进度条
+        progressDialog.setCancelable(false);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        projectsListAdapter = new ProjectsListAdapter(null);
+        projectsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        projectsListAdapter.isFirstOnly(false);
+        recyclerView.setAdapter(projectsListAdapter);
+
+        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+        refreshLayout.setOnRefreshListener(this);
+//        projectsListAdapter.setOnLoadMoreListener(this);
+
+        request_status=null;
+        switch (name){
+            case "报名中":
+                request_status="1";
+                break;
+            case "进行中":
+                request_status="2";
+                break;
+            case "已完成":
+                request_status="3";
+                break;
+            default:
+                break;
+        }
+
+        //开启loading,获取数据
+        setRefreshing(true);
+        onRefresh();
+    }
+
+    /** 下拉刷新 */
+    @Override
+    public void onRefresh() {
+        progressDialog.setMessage("加载中...");
+        showDiaglog();
+        OkGo.<String>get(URL_PROJECT+"?status="+request_status)//
+                .cacheKey("TabFragment_" + name)       //由于该fragment会被复用,必须保证key唯一,否则数据会发生覆盖
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)  //缓存模式先使用缓存,然后使用网络数据
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        hideDialog();
+                        List<Projects> results = new Gson().fromJson(response.body(), new TypeToken<List<Projects>>(){}.getType());
+                        if (results != null) {
+//                            currentPage = 2;
+                            projectsListAdapter.setNewData(results);
+                        }
+                    }
+
+                    @Override
+                    public void onCacheSuccess(Response<String> response) {
+                        //一般来说,只需呀第一次初始化界面的时候需要使用缓存刷新界面,以后不需要,所以用一个变量标识
+                        if (!isInitCache) {
+                            //一般来说,缓存回调成功和网络回调成功做的事情是一样的,所以这里直接回调onSuccess
+                            onSuccess(response);
+                            isInitCache = true;
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        //网络请求失败的回调,一般会弹个Toast
+                        Toast.makeText(getContext(),"error",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        //可能需要移除之前添加的布局
+                        projectsListAdapter.removeAllFooterView();
+                        //最后调用结束刷新的方法
+                        setRefreshing(false);
+                    }
+                });
+    }
+
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,98 +159,6 @@ public class ProjectsContentFragment extends Fragment {
         if (name == null) {
             name = "参数非法";
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_projects_content, container, false);
-        ButterKnife.bind(this, view);
-        initView();
-
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        ProjectsListAdapter adapter=new ProjectsListAdapter(R.layout.fragment_projects_item,projectsItemList);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(),ProjectsDetailActivity.class));
-
-            }
-        });
-        return view;
-    }
-
-    private void initView(){
-        progressDialog = new ProgressDialog(getContext());//进度条
-        progressDialog.setCancelable(false);
-        if (flag==0){
-            initDatas();
-            flag+=1;
-        }
-
-    }
-
-    private void initDatas() {
-        //由name决定请求的项目状态类型
-        request_status=null;
-        switch (name){
-            case "报名中":
-                request_status="1";
-                requestServer(request_status);
-                break;
-            case "进行中":
-                request_status="2";
-                requestServer(request_status);
-                break;
-            case "已完成":
-                request_status="3";
-                requestServer(request_status);
-                break;
-            default:
-                break;
-        }
-
-
-//        for (int i=0;i<=2;i++){
-//
-//        }
-
-//
-//     Projects news1=new Projects(list.get(0).getTime_start(),list.get(0).getId(),list.get(0).getTittle(),list.get(0).getTeacher());
-//        Projects news2=new Projects("2","绿色网络关键技术研究","老师:苏俊","成员：6人","2019.4.11");
-////        Projects news3=new Projects("3","信息传输分系统研制","老师:李明","成员：4人","2019.4.26");
-////        Projects news4=new Projects("4","车用无线自组织网络安全告警信息传输策略研究","老师:赵茜珊","成员：7人","2019.4.29");
-////        Projects news5=new Projects("5","龙门山地震带小流域滑坡泥石流灾害监测预警技术研究与示范","老师:琴发华","成员：5人","2019.5.06");
-////
-//       projectsItemList.add(news1);
-////        projectsItemList.add(news2);
-////        projectsItemList.add(news3);
-////        projectsItemList.add(news4);
-////        projectsItemList.add(news5);
-    }
-
-    private void requestServer(final String status){
-        progressDialog.setMessage("加载中...");
-        showDiaglog();
-
-        OkGo.<String>get(URL_Projects+"?status="+status)
-                .tag(this)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        hideDialog();
-                        projectsItemList= new Gson().fromJson(response.body(), new TypeToken<List<Projects>>(){}.getType());
-                        Toast.makeText(getContext(),projectsItemList.get(0).toString(),Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-
-                    }
-                });
     }
 
     //显示进度条
@@ -167,5 +174,17 @@ public class ProjectsContentFragment extends Fragment {
             progressDialog.hide();
         }
     }
+    public void setRefreshing(final boolean refreshing) {
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(refreshing);
+            }
+        });
+    }
+    public void showToast(String msg) {
+        Snackbar.make(recyclerView, msg, Snackbar.LENGTH_SHORT).show();
+    }
+
 
 }

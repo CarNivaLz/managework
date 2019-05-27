@@ -57,8 +57,9 @@ public class Projects {
     private int id;
 
     private String name;
-//    @SerializedName("city")
-//    private String member_num;
+
+    @SerializedName("need_stu_count")
+    private int member_num;
 
     private String people_name;
     public int getId() {
@@ -73,19 +74,19 @@ public class Projects {
         return people_name;
     }
 
-//    public String getMember_num() {
-//        return member_num;
-//    }
-
     public String getTime_start() {
         return date_start;
     }
 
-    public Projects(String date_start,int id,String name, String people_name ) {
+    public int getMember_num() {
+        return member_num;
+    }
+
+    public Projects(String date_start,int id,String name, String people_name ,int member_num) {
         this.id=id;
         this.name = name;
         this.people_name = people_name;
-//        this.member_num = member_num;
+        this.member_num = member_num;
         this.date_start = date_start;
     }
     @Override

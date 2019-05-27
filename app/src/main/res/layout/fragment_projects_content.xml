@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/refreshLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.ProjectsContentFragment">
+    android:layout_height="match_parent">
 
     <!--<TextView-->
         <!--android:id="@+id/txt_content"-->
@@ -17,4 +17,4 @@
         android:id="@+id/projects_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
