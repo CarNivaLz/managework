@@ -83,7 +83,7 @@ public class AchievementsContentFragment extends BaseFragment implements SwipeRe
         achievementsListAdapter.isFirstOnly(false);
         recyclerView.setAdapter(achievementsListAdapter);
 
-        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+        refreshLayout.setColorSchemeColors(Color.BLUE, Color.RED, Color.GREEN);
         refreshLayout.setOnRefreshListener(this);
 //        projectsListAdapter.setOnLoadMoreListener(this);
 

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.dommy.tab.MainActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.module.SearchResults;
 import com.dommy.tab.ui.ProjectsDetailActivity;
@@ -23,6 +24,9 @@ import com.dommy.tab.ui.SearchResultsActivity;
 import com.fantasy.doubledatepicker.DoubleDateSelectDialog;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,10 +43,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private String allowedSmallestTime = "2012-1-1";
     private String allowedBiggestTime = "2025-12-12";
 
-    private String input_member;
-    private String input_name;
-    private String input_date_sta;
-    private String input_date_fin;
+    private String input_member=null;
+    private String input_name=null;
+    private String input_date_sta=null;
+    private String input_date_fin=null;
+    private ArrayList<Integer> input_category=new ArrayList<>();
 
     private DoubleDateSelectDialog mDoubleTimeSelectDialog;
 
@@ -84,7 +89,17 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v){
         switch (v.getId()) {
             case R.id.s_send:
-                startActivity(new Intent(getContext(),SearchResultsActivity.class));
+                if(input_date_fin==null&&input_date_sta==null&&input_name==null&&input_member==null&&input_category.size()==0&&input_category==null){
+                    Toast.makeText(getContext(),"请先输入查询信息",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(getContext(), SearchResultsActivity.class);
+                    intent.putExtra("date_s", input_date_sta);
+                    intent.putExtra("date_f",input_date_fin);
+                    intent.putExtra("name",input_name);
+                    intent.putExtra("member",input_member);
+                    intent.putIntegerArrayListExtra("category",input_category);
+                    startActivity(intent);
+                }
                 break;
             case R.id.s_time_sta:
                 showCustomTimePicker();
@@ -148,6 +163,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                             @Override
                             public void onItemsSelected(List<Integer> positions, List<String> items) {
                                 TextUtils.join("\n", items);
+                                    for (Integer num:positions ){
+                                        input_category.add(num);
+                                    }
+
                             }
                         })
                         .setConfirmButtonText("确认")
@@ -165,6 +184,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onSelectFinished(String startTime, String endTime) {
                     Toast.makeText(getActivity(),"您选择的时间范围为"+startTime+"到"+endTime,Toast.LENGTH_SHORT).show();
+                    input_date_sta=startTime;
+                    input_date_fin=endTime;
                 }
             });
 
