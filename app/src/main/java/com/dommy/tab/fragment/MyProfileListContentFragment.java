@@ -21,10 +21,12 @@ import com.dommy.tab.adapter.AchievementsListAdapter;
 import com.dommy.tab.adapter.CopyrightAdapter;
 import com.dommy.tab.adapter.PaperAdapter;
 import com.dommy.tab.adapter.PatentAdapter;
+import com.dommy.tab.adapter.ProjectAdapter;
 import com.dommy.tab.adapter.ProjectsListAdapter;
 import com.dommy.tab.module.Copyright;
 import com.dommy.tab.module.Paper;
 import com.dommy.tab.module.Patent;
+import com.dommy.tab.module.Project;
 import com.dommy.tab.module.Projects;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,6 +44,7 @@ import butterknife.ButterKnife;
 import static com.dommy.tab.utils.ApiConfig.URL_MYCOPYRIGHT;
 import static com.dommy.tab.utils.ApiConfig.URL_MYPAPER;
 import static com.dommy.tab.utils.ApiConfig.URL_MYPATENT;
+import static com.dommy.tab.utils.ApiConfig.URL_MYPROJECT;
 import static com.dommy.tab.utils.ApiConfig.URL_PROJECT;
 
 public class MyProfileListContentFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
@@ -54,6 +57,7 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
     private PaperAdapter paperAdapter;
     private CopyrightAdapter copyrightAdapter;
     private PatentAdapter patentAdapter;
+    private ProjectAdapter projectAdapter;
 
     private boolean isInitCache = false;
     public static MyProfileListContentFragment newInstance() {
@@ -107,6 +111,10 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
         recyclerView.setAdapter(paperAdapter);
         switch (name){
             case 1:
+                url=URL_MYPROJECT;
+                projectAdapter = new ProjectAdapter(null);
+                projectAdapter.isFirstOnly(false);
+                recyclerView.setAdapter(projectAdapter);
                 break;
             case 2:
                 url=URL_MYPAPER;
@@ -155,6 +163,10 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
 //                                }
                         switch (name){
                             case 1:
+                                List<Project> results1 = new Gson().fromJson(response.body(), new TypeToken<List<Project>>(){}.getType());
+                                if (results1 != null) {
+                                    projectAdapter.setNewData(results1);
+                                }
                                 break;
                             case 2:
                                 List<Paper> results2 = new Gson().fromJson(response.body(), new TypeToken<List<Paper>>(){}.getType());
@@ -199,7 +211,7 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
                     public void onFinish() {
                         //可能需要移除之前添加的布局
                         switch (name){
-                            case 1:
+                            case 1:projectAdapter.removeAllFooterView();
                                 break;
                             case 2:paperAdapter.removeAllFooterView();
                                 break;

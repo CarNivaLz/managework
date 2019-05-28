@@ -12,6 +12,6 @@ public class ApiConfig {
     public static String URL_MYPAPER = "http://120.78.151.240:8080/myPaperList";
     public static String URL_MYPATENT = "http://120.78.151.240:8080/myPatentList";
     public static String URL_MYCOPYRIGHT = "http://120.78.151.240:8080/myCopyrightList";
-
+    public static String URL_MYASSESSMENT="http://120.78.151.240:8080/myEvaluationList";
 
 }

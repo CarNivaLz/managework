@@ -5,21 +5,21 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dommy.tab.R;
-import com.dommy.tab.module.Projects;
+import com.dommy.tab.module.Assessments;
+
 
 import java.util.List;
 
-public class MyAssessmentListAdapter extends BaseItemDraggableAdapter<Projects, BaseViewHolder> {
+public class MyAssessmentListAdapter extends BaseItemDraggableAdapter<Assessments, BaseViewHolder> {
     public MyAssessmentListAdapter(List data) {
         super(R.layout.item_assessment, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder baseViewHolder, Projects item) {
-        baseViewHolder.setText(R.id.projects_tittle,item.getTittle())
-                .setText(R.id.projects_teacher,item.getTeacher())
-                .setText(R.id.projects_member_num,item.getMember_num()+"人")
-                .setText(R.id.projects_time_start,item.getTime_start());
+    protected void convert(BaseViewHolder baseViewHolder, Assessments item) {
+        baseViewHolder.setText(R.id.assessment_title,"评价人："+item.getTea_name()+"学生："+item.getStu_name())
+                .setText(R.id.assessment_project,item.getProj_name());
+
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {
             @Override

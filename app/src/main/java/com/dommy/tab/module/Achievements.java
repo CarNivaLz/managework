@@ -13,12 +13,13 @@ public class Achievements {
          */
 
         private String id;
+        @SerializedName("name")
         private String title;
-        @SerializedName("journal")
+        @SerializedName("author_name")
         private String teacher;
         @SerializedName("status")
         private String member_num;
-        @SerializedName("date_deliver")
+        @SerializedName("date")
         private String time_start;
 
         public String getId() {
