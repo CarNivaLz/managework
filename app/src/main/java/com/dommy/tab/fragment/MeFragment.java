@@ -14,10 +14,8 @@ import android.widget.RelativeLayout;
 import com.dommy.tab.R;
 import com.dommy.tab.ui.LoginActivity;
 import com.dommy.tab.ui.MyAssessmentsActivity;
-import com.dommy.tab.ui.MyCopytightsActivity;
-import com.dommy.tab.ui.MyPapersActivity;
-import com.dommy.tab.ui.MyPatentsActivity;
-import com.dommy.tab.ui.MyProjectsActivity;
+import com.dommy.tab.ui.MyProfileActivity;
+
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -75,16 +73,25 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             break;
 
         case R.id.me_project:
-            startActivity(new Intent(getContext(),MyProjectsActivity.class));
+
+            Intent intent1=new Intent(getContext(),MyProfileActivity.class);
+            intent1.putExtra("from",1);
+            startActivity(intent1);
             break;
         case R.id.me_paper:
-            startActivity(new Intent(getContext(),MyPapersActivity.class));
+            Intent intent2=new Intent(getContext(),MyProfileActivity.class);
+            intent2.putExtra("from",2);
+            startActivity(intent2);
             break;
         case R.id.me_patent:
-            startActivity(new Intent(getContext(),MyPatentsActivity.class));
+            Intent intent3=new Intent(getContext(),MyProfileActivity.class);
+            intent3.putExtra("from",3);
+            startActivity(intent3);
             break;
         case R.id.me_copyright:
-            startActivity(new Intent(getContext(),MyCopytightsActivity.class));
+            Intent intent4=new Intent(getContext(),MyProfileActivity.class);
+            intent4.putExtra("from",4);
+            startActivity(intent4);
             break;
         case R.id.me_assessment:
             startActivity(new Intent(getContext(),MyAssessmentsActivity.class));

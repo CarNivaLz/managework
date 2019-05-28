@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -29,6 +30,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,9 @@ public class AchievementsContentFragment extends BaseFragment implements SwipeRe
     private Context context;
     private AchievementsListAdapter achievementsListAdapter;
     private boolean isInitCache = false;
+
+
+
     public static AchievementsContentFragment newInstance() {
         return new AchievementsContentFragment();
     }
@@ -86,8 +91,7 @@ public class AchievementsContentFragment extends BaseFragment implements SwipeRe
         refreshLayout.setColorSchemeColors(Color.BLUE, Color.RED, Color.GREEN);
         refreshLayout.setOnRefreshListener(this);
 //        projectsListAdapter.setOnLoadMoreListener(this);
-
-        url=null;
+              url=null;
         switch (name){
             case "论文":
                 url=URL_ACHIEVEMENT_PAPER;
@@ -102,16 +106,17 @@ public class AchievementsContentFragment extends BaseFragment implements SwipeRe
                 break;
         }
 
-        //开启loading,获取数据
-//        setRefreshing(true);
-//        onRefresh();
+//          开启loading,获取数据
+        setRefreshing(true);
+        onRefresh();
     }
 
     /** 下拉刷新 */
     @Override
     public void onRefresh() {
-        progressDialog.setMessage("加载中...");
+//        progressDialog.setMessage("加载中...");
 //        showDiaglog();
+
         OkGo.<String>get(url)//
                 .cacheKey("TabFragment_" + name)       //由于该fragment会被复用,必须保证key唯一,否则数据会发生覆盖
                 .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)  //缓存模式先使用缓存,然后使用网络数据

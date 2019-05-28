@@ -1,7 +1,9 @@
 package com.dommy.tab.module;
 
 
-        public class Achievements {
+import com.google.gson.annotations.SerializedName;
+
+public class Achievements {
         /**
          * id : 57c83777421aa97cbd81c74d
          * tittle : 团队项目网络管理系统
@@ -11,9 +13,12 @@ package com.dommy.tab.module;
          */
 
         private String id;
-        private String tittle;
+        private String title;
+        @SerializedName("journal")
         private String teacher;
+        @SerializedName("status")
         private String member_num;
+        @SerializedName("date_deliver")
         private String time_start;
 
         public String getId() {
@@ -21,7 +26,7 @@ package com.dommy.tab.module;
         }
 
         public String getTittle() {
-        return tittle;
+        return title;
         }
 
         public String getTeacher() {
@@ -38,7 +43,7 @@ package com.dommy.tab.module;
 
         public Achievements(String id,String title, String teacher, String member_num, String time_start) {
         this.id=id;
-        this.tittle = title;
+        this.title = title;
         this.teacher = teacher;
         this.member_num = member_num;
         this.time_start = time_start;

@@ -14,15 +14,15 @@ import java.util.List;
 
 public class AchievementsListAdapter extends BaseQuickAdapter<Achievements,BaseViewHolder> {
     public AchievementsListAdapter(List<Achievements> data){
-        super(R.layout.fragment_projects_item,data);
+        super(R.layout.fragment_achievements_item,data);
     }
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Achievements item) {
-        baseViewHolder.setText(R.id.projects_tittle,item.getTittle())
-                .setText(R.id.achievements_teacher,item.getTeacher())
-                .setText(R.id.achievements_member_num,item.getMember_num())
-                .setText(R.id.achievements_time_start,item.getTime_start());
+        baseViewHolder.setText(R.id.achievements_tittle,item.getTittle())
+                .setText(R.id.achievements_position1,item.getTeacher())
+                .setText(R.id.achievements_position2,item.getMember_num())
+                .setText(R.id.achievements_position3,item.getTime_start());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {
             @Override

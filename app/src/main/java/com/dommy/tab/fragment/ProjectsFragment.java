@@ -35,7 +35,7 @@ public class ProjectsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initData();
+        initDatas();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ProjectsFragment extends Fragment {
         return view;
     }
 
-    private void initData() {
+    private void initDatas() {
         names = new ArrayList<>();
         names.add("报名中");
         names.add("进行中");

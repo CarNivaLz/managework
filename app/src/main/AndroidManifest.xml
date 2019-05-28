@@ -14,8 +14,11 @@
 
         </activity>
         <activity android:name=".ui.ProjectsDetailActivity"></activity>
+        <activity android:name=".ui.MyProfileActivity"></activity>
         <activity android:name=".ui.SearchResultsActivity"></activity>
         <activity android:name=".ui.SignUpActivity"></activity>
+        <activity android:name=".ui.MyAssessmentsActivity"></activity>
+
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

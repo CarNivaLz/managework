@@ -74,7 +74,6 @@ public class ProjectsContentFragment extends BaseFragment implements SwipeRefres
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         projectsListAdapter = new ProjectsListAdapter(null);
-//        projectsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         projectsListAdapter.isFirstOnly(false);
         recyclerView.setAdapter(projectsListAdapter);
 

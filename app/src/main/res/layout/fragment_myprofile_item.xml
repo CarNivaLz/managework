@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp">
             <TextView
-                android:id="@+id/achievements_tittle"
+                android:id="@+id/tittle"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                 android:layout_gravity="bottom"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/achievements_position1"
+                    android:id="@+id/position1"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                     android:text="老师"/>
 
                 <TextView
-                    android:id="@+id/achievements_position2"
+                    android:id="@+id/position2"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                     android:textSize="14dp"
                     android:text="5人"/>
                 <TextView
-                    android:id="@+id/achievements_position3"
+                    android:id="@+id/position3"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_width="wrap_content"
