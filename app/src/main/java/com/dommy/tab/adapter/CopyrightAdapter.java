@@ -19,8 +19,8 @@ public class CopyrightAdapter extends BaseQuickAdapter<Copyright,BaseViewHolder>
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Copyright item) {
         baseViewHolder.setText(R.id.tittle,item.getTitle())
-                .setText(R.id.position1,item.getNumber()+"版权号")
-                .setText(R.id.position2,item.getStatus()+"状态")
+                .setText(R.id.position1,"版权号："+item.getNumber())
+                .setText(R.id.position2,"状态："+item.getStatus())
                 .setText(R.id.position3,item.getDate());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {

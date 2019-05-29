@@ -18,9 +18,24 @@ public class PatentAdapter extends BaseQuickAdapter<Patent,BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Patent item) {
+        String status="";
+        switch (item.getStatus()){
+            case 1:status="已申请";
+                break;
+            case 2:status="已受理";
+                break;
+            case 3:status="已公布";
+                break;
+            case 4:status="已授权";
+                break;
+            case 0:status="失败";
+                break;
+            default:status="无";
+                break;
+        }
         baseViewHolder.setText(R.id.tittle,item.getTitle())
-                .setText(R.id.position1,item.getNum_acceptance()+"专利号")
-                .setText(R.id.position2,item.getStatus()+"状态")
+                .setText(R.id.position1,"专利号："+item.getNum_acceptance())
+                .setText(R.id.position2,"状态："+status)
                 .setText(R.id.position3,item.getDate_acceptance());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {

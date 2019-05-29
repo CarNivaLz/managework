@@ -20,8 +20,8 @@ public class AchievementsListAdapter extends BaseQuickAdapter<Achievements,BaseV
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Achievements item) {
         baseViewHolder.setText(R.id.achievements_tittle,item.getTittle())
-                .setText(R.id.achievements_position1,item.getTeacher())
-                .setText(R.id.achievements_position2,item.getMember_num())
+                .setText(R.id.achievements_position1,"姓名："+item.getTeacher())
+                .setText(R.id.achievements_position2,"状态："+item.getMember_num())
                 .setText(R.id.achievements_position3,item.getTime_start());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {

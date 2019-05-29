@@ -35,17 +35,18 @@
                     android:id="@+id/projects_teacher"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="14dp"
+
                     android:text="老师"/>
 
                 <TextView
                     android:id="@+id/projects_member_num"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="14dp"
@@ -54,7 +55,7 @@
                     android:id="@+id/projects_time_start"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="14dp"

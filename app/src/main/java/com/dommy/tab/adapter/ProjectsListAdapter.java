@@ -19,8 +19,8 @@ public class ProjectsListAdapter extends BaseQuickAdapter<Projects,BaseViewHolde
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Projects item) {
         baseViewHolder.setText(R.id.projects_tittle,item.getTittle())
-                .setText(R.id.projects_teacher,item.getTeacher())
-                .setText(R.id.projects_member_num,item.getMember_num()+"人")
+                .setText(R.id.projects_teacher,"负责人："+item.getTeacher())
+                .setText(R.id.projects_member_num,"人数："+item.getMember_num())
                 .setText(R.id.projects_time_start,item.getTime_start());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {

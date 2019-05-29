@@ -17,11 +17,27 @@ public class PaperAdapter extends BaseQuickAdapter<Paper,BaseViewHolder> {
         super(R.layout.fragment_myprofile_item,data);
     }
 
+
+
+
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Paper item) {
+        String status="";
+        switch (item.getStatus()){
+            case 1:status="已投递";
+                break;
+            case 2:status="已过审";
+                break;
+            case 3:status="已发表";
+                break;
+            case 4:status="已检索";
+                break;
+            default:status="无";
+                break;
+        }
         baseViewHolder.setText(R.id.tittle,item.getTitle())
-                .setText(R.id.position1,item.getJournal())
-                .setText(R.id.position2,item.getStatus()+"状态")
+                .setText(R.id.position1,"期刊："+item.getJournal())
+                .setText(R.id.position2,"状态："+status)
                 .setText(R.id.position3,item.getDate_deliver());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {
