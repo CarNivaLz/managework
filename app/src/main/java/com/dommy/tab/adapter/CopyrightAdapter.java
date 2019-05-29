@@ -18,6 +18,15 @@ public class CopyrightAdapter extends BaseQuickAdapter<Copyright,BaseViewHolder>
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Copyright item) {
+        String status="";
+        switch (item.getStatus()){
+            case 0: status="未发表";
+                break;
+            case 1:status="已发表";
+                break;
+            default:status="无";
+                break;
+        }
         baseViewHolder.setText(R.id.tittle,item.getTitle())
                 .setText(R.id.position1,"版权号："+item.getNumber())
                 .setText(R.id.position2,"状态："+item.getStatus())

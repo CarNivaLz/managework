@@ -38,7 +38,12 @@ public class MyAssessmentsActivity extends BaseActivity implements SwipeRefreshL
     private SwipeRefreshLayout refreshLayout;
     private boolean isInitCache = false;
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        OkGo.getInstance().cancelTag(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

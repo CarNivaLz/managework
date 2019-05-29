@@ -18,8 +18,9 @@ public class MyAssessmentListAdapter extends BaseItemDraggableAdapter<Assessment
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Assessments item) {
         baseViewHolder.setText(R.id.assessment_title,"老师:"+item.getTea_name()+"   学生:"+item.getStu_name())
-                .setText(R.id.assessment_project,item.getProj_name());
-
+                .setText(R.id.assessment_project,"项目："+item.getProj_name())
+                .setText(R.id.assessment_score,"分数："+item.getScore())
+                .setText(R.id.assessment_evaluate,"评价："+item.getContent());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {
             @Override

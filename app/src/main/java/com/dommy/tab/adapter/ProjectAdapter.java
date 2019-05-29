@@ -20,8 +20,8 @@ public class ProjectAdapter extends BaseQuickAdapter<Project,BaseViewHolder> {
     protected void convert(BaseViewHolder baseViewHolder, Project item) {
         baseViewHolder.setText(R.id.tittle,item.getTitle())
                 .setText(R.id.position1,item.getType()+"个人状态")
-                .setText(R.id.position2,item.getNeed_stu_count()+"人数")
-                .setText(R.id.position3,item.getDate_start());
+                .setText(R.id.position2,item.getPeople()+"人数")
+                .setText(R.id.position3,item.getDate());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {
             @Override

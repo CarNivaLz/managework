@@ -1,5 +1,6 @@
 package com.dommy.tab.adapter;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -7,6 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.dommy.tab.R;
 import com.dommy.tab.module.Projects;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.dommy.tab.ui.ProjectsDetailActivity;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class ProjectsListAdapter extends BaseQuickAdapter<Projects,BaseViewHolde
             @Override
             public void onClick(View v) {
                 //进入projectdetail页面逻辑WebActivity.runActivity(mContext, model.desc, model.url);
+                ProjectsDetailActivity.runActivity(mContext,item.getId());
             }
         });
     }

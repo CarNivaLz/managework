@@ -4,7 +4,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="120dp"
     android:background="@android:color/white"
     android:orientation="horizontal"
     android:layout_marginBottom="1dp"
@@ -24,6 +24,7 @@
         android:layout_weight="1"
         android:layout_marginLeft="13dp"
         android:gravity="center"
+        android:layout_marginRight="13dp"
         android:orientation="vertical">
 
         <TextView
@@ -36,24 +37,47 @@
             android:textSize="16sp"
             android:textColor="@android:color/black"
             />
-        <TextView
-            android:id="@+id/assessment_project"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/assessment_project"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:text="材料的关联重构与高效能 "
+                android:textColor="@color/wx_head_default"
+                />
+            <TextView
+                android:id="@+id/assessment_score"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:text="9 "
+                android:textColor="@color/wx_head_default"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/assessment_evaluate"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_gravity="start"
             android:layout_marginTop="10dp"
             android:text="材料的关联重构与高效能 "
             android:textColor="@color/wx_head_default"
             />
+
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:scaleType="center"
-        android:layout_marginRight="27dp"
-        android:src="@drawable/drag_icon" />
+
 
 
 </LinearLayout>

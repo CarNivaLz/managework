@@ -3,27 +3,36 @@ package com.dommy.tab.module;
 import com.google.gson.annotations.SerializedName;
 
 public class Project {
+
     /**
-     * date_start : 2019-01-01
-     * id : 10002
-     * name : 物联网项目
-     * need_stu_count : 9
+     * date : 2019-05-28
+     * id : 100015
+     * info : 物联网硬件价格表
+     * name : project10002.xls
+     * path : /home/file/project/10002/file
+     * people : 12
+     * project : 10002
+     * size : 21
      * type : 1
      */
-
-    private String date_start;
+    
+    private String date;
     private int id;
+    private String info;
     @SerializedName("name")
     private String title;
-    private int need_stu_count;
-    private String type;
+    private String path;
+    private int people;
+    private int project;
+    private int size;
+    private int type;
 
-    public String getDate_start() {
-        return date_start;
+    public String getDate() {
+        return date;
     }
 
-    public void setDate_start(String date_start) {
-        this.date_start = date_start;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getId() {
@@ -34,6 +43,14 @@ public class Project {
         this.id = id;
     }
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -42,19 +59,43 @@ public class Project {
         this.title = name;
     }
 
-    public int getNeed_stu_count() {
-        return need_stu_count;
+    public String getPath() {
+        return path;
     }
 
-    public void setNeed_stu_count(int need_stu_count) {
-        this.need_stu_count = need_stu_count;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public String getType() {
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
+    }
+
+    public int getProject() {
+        return project;
+    }
+
+    public void setProject(int project) {
+        this.project = project;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 }

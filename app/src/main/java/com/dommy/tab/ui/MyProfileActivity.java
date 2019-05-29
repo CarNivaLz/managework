@@ -14,6 +14,7 @@ import com.dommy.tab.adapter.ProjectsListAdapter;
 import com.dommy.tab.fragment.MyProfileListContentFragment;
 import com.dommy.tab.fragment.ProjectsContentFragment;
 import com.dommy.tab.utils.AppManager;
+import com.lzy.okgo.OkGo;
 
 public class MyProfileActivity extends BaseActivity {
 
@@ -38,6 +39,12 @@ public class MyProfileActivity extends BaseActivity {
         fragmentTransaction.commit();
         fragment.setArguments(bundle);//数据传递到fragment中
 
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        OkGo.getInstance().cancelTag(this);
     }
     @Override
     public void onStop(){

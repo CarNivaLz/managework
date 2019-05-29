@@ -115,7 +115,12 @@ public class SearchResultsActivity extends BaseActivity {
             progressDialog.hide();
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        OkGo.getInstance().cancelTag(this);
+    }
 }
 
 
