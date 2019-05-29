@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.dommy.tab.R;
 import com.dommy.tab.adapter.MyAssessmentListAdapter;
+import com.dommy.tab.adapter.ProjectDetailItemAdapter;
 import com.dommy.tab.module.Assessments;
+import com.dommy.tab.module.Document;
 import com.dommy.tab.module.Project;
 import com.dommy.tab.module.ProjectDetail;
 import com.dommy.tab.module.UserBean;
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
 
 import static com.dommy.tab.utils.ApiConfig.URL_MYASSESSMENT;
 import static com.dommy.tab.utils.ApiConfig.URL_PROJECTDETAIL;
+import static com.dommy.tab.utils.ApiConfig.URL_ProjectDoc;
 
 public class ProjectsDetailActivity extends AppCompatActivity {
 
@@ -41,7 +44,6 @@ public class ProjectsDetailActivity extends AppCompatActivity {
     List<ProjectDetail> projectDetailList = new ArrayList<>();
 
     private ProgressDialog progressDialog;
-    private boolean isInitCache = false;
     private int projId;
     private TextView title;
     private TextView manager;
@@ -50,8 +52,10 @@ public class ProjectsDetailActivity extends AppCompatActivity {
     private TextView time;
     private TextView member;
     private TextView decoration;
-    private TextView doc;
     private TextView achieve;
+    private RecyclerView docRecycle;
+    private RecyclerView historyRecycle;
+    private ProjectDetailItemAdapter projectDetailItemAdapter;
 
 
     @Override
@@ -61,21 +65,27 @@ public class ProjectsDetailActivity extends AppCompatActivity {
         Intent getIntent=getIntent();
         projId=getIntent.getIntExtra("id",-1);
         init();
-        progressDialog = new ProgressDialog(this);//进度条
-        progressDialog.setCancelable(false);
-        onRefresh();
+
+        onFresh();
     }
 
     private void init(){
-          title=findViewById(R.id.project_detail_title);
-          manager=findViewById(R.id.project_detail_manager);
-          progress=findViewById(R.id.project_detail_progress);
-          status=findViewById(R.id.project_detail_status);
-          time=findViewById(R.id.project_detail_time);
-          member=findViewById(R.id.project_detail_member);
-          decoration=findViewById(R.id.project_detail_dec);
-          doc=findViewById(R.id.project_detail_doc);
-          achieve=findViewById(R.id.project_detail_achieve);
+        progressDialog = new ProgressDialog(this);//进度条
+
+        docRecycle=(RecyclerView)findViewById(R.id.doc_recycle) ;
+        docRecycle.setLayoutManager(new LinearLayoutManager(this));
+        projectDetailItemAdapter = new ProjectDetailItemAdapter(null);
+        docRecycle.setAdapter(projectDetailItemAdapter);
+
+        progressDialog.setCancelable(false);
+        title=(TextView) findViewById(R.id.project_detail_title);
+        manager=(TextView) findViewById(R.id.project_detail_manager);
+        progress=(TextView) findViewById(R.id.project_detail_progress);
+        status=(TextView) findViewById(R.id.project_detail_status);
+        time=(TextView) findViewById(R.id.project_detail_time);
+        member=(TextView) findViewById(R.id.project_detail_member);
+        decoration=(TextView) findViewById(R.id.project_detail_dec);
+        achieve=(TextView) findViewById(R.id.project_detail_achieve);
     }
 
 
@@ -90,9 +100,9 @@ public class ProjectsDetailActivity extends AppCompatActivity {
         intent.putExtra("id",projectId);
         context.startActivity(intent);
     }
-    public void onRefresh() {
+    public void onFresh() {
         progressDialog.setMessage("加载中...");
-//        showDiaglog();
+        showDiaglog();
         OkGo.<String>get(URL_PROJECTDETAIL+"?id="+projId)//
                 .tag(this)
                 .execute(new StringCallback() {
@@ -101,30 +111,42 @@ public class ProjectsDetailActivity extends AppCompatActivity {
                         hideDialog();
                         ProjectDetail results = new Gson().fromJson(response.body().toString(), ProjectDetail.class);
                         if (results != null) {
-                         title.setText(results.getTitle());
-
-                          manager.setText(results.getPeople_name());
-                           progress.setText("进度：60%");
-                           status.setText(results.getStatus()+"");
-                          time.setText(results.getDate_start());
-                          member.setText(results.memberToString());
-                            decoration.setText(results.getDescription());
-//                           doc;
-//                           achieve;
-
+                             title.setText(results.getTitle());
+                             manager.setText(results.getPeople_name());
+                             progress.setText("进度：60%");status.setText(results.getStatus()+"");
+                             time.setText(results.getDate_start());
+                             member.setText(results.memberToString());
+                             decoration.setText(results.getDescription());
                         }
                     }
-
-
 
                     @Override
                     public void onError(Response<String> response) {
                         //网络请求失败的回调,一般会弹个Toast
                         Toast.makeText(getApplicationContext(),"网络请求失败"+projId,Toast.LENGTH_LONG).show();
                     }
-
-
                 });
+
+        OkGo.<String>get(URL_ProjectDoc+"?id="+projId)//
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        hideDialog();
+                        List<Document> results = new Gson().fromJson(response.body(), new TypeToken<List<Document>>(){}.getType());
+                        if (results != null) {
+                            projectDetailItemAdapter.setNewData(results);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        //网络请求失败的回调,一般会弹个Toast
+                        Toast.makeText(getApplicationContext(),"网络请求失败"+projId,Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
     }
         //显示进度条
     private void showDiaglog() {

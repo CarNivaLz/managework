@@ -118,25 +118,7 @@
             />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:text="项目资料"
-            android:textColor="#1C1C1C"
-            android:textSize="20dp" />
-            <TextView
-                android:id="@+id/project_detail_doc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:singleLine="false"
-                android:text="1.基于能效的单小区网络-用户联合资源分配"
-                android:textSize="16dp" />
+
 
         <View  android:layout_height="20px"
             android:layout_marginTop="20dp"
@@ -182,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:textColor="#1C1C1C"
-                android:text="项目动态"
+                android:text="项目资料"
                 android:textSize="18dp" />
         </LinearLayout>
 
@@ -196,7 +178,7 @@
             android:background="#CFCFCF"
             />
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/comment_recycle"
+            android:id="@+id/doc_recycle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
