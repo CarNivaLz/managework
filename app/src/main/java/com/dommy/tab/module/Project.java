@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Project {
 
     /**
-     * date : 2019-05-28
+     * date_start : 2019-05-28
      * id : 100015
      * info : 物联网硬件价格表
      * name : project10002.xls
@@ -15,7 +15,7 @@ public class Project {
      * size : 21
      * type : 1
      */
-    
+    @SerializedName("date_start")
     private String date;
     private int id;
     private String info;

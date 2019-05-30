@@ -131,20 +131,25 @@ public class ProjectDetail {
         this.part_tea_name = part_tea_name;
     }
 
-    public String memberToString() {
+    public String TmemberToString() {
 //        return "LzyResponse{\n" +//
 //                "\tid=" + id + "\n" +//
 //                "\tname='" + name + "\'\n" +//
 //                "\tpn=" + people_name + "\n" +//
 //                "\ttime=" + date_start + "\n" +//
 //                '}';
-        String member="";
+        String tmember="";
+
         for (String str1:part_tea_name){
-            member=member+str1+"  ";
+            tmember=tmember+str1+"  ";
         }
+        return tmember;
+    }
+    public String SmemberToString() {
+        String smember="";
         for (String str2:part_stu_name){
-            member=member+str2+"  ";
+            smember=smember+str2+"  ";
         }
-        return member;
+        return smember;
     }
 }

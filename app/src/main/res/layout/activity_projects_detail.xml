@@ -63,7 +63,7 @@
             android:background="#EBEBEB"
             />
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal" android:layout_width="match_parent"
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
 
@@ -73,16 +73,33 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:textColor="#1C1C1C"
-            android:text="项目成员"
-            android:textSize="20dp" />
-        <TextView
-            android:id="@+id/project_detail_member"
-           android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="老师:李明"/>
+            android:text="项目成员"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/project_detail_Tmember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="老师"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/project_detail_Smember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="学生"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="18dp" />
 
     </LinearLayout>
         <View  android:layout_height="20px"
@@ -109,24 +126,11 @@
             android:text="该项目重点研究并突破通信网络（包括终端、无线/有线接入网、核心网、传输网）端到端低能耗绿色网络架构演进和管理技术、面向新业务新终端的网络融合技术、绿色网络的系统技术，构造端到端的绿色节能网络示范网络和评价体系，积极推进产业化进程。"
             android:textSize="18dp" />
 
-
-
         <View  android:layout_height="20px"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:background="#EBEBEB"
             />
-
-
-
-
-        <View  android:layout_height="20px"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:background="#EBEBEB"
-            />
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,7 +161,8 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -166,6 +171,14 @@
                 android:textColor="#1C1C1C"
                 android:text="项目资料"
                 android:textSize="18dp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/doc_recycle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
 
@@ -177,11 +190,29 @@
             android:layout_width="match_parent"
             android:background="#CFCFCF"
             />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/doc_recycle"
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="100dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#1C1C1C"
+                android:text="项目动态"
+                android:textSize="18dp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/history_recycle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.dommy.tab.R;
 import com.dommy.tab.adapter.MyAssessmentListAdapter;
 import com.dommy.tab.adapter.ProjectDetailItemAdapter;
+import com.dommy.tab.adapter.ProjectHistoryItemAdapter;
 import com.dommy.tab.module.Assessments;
 import com.dommy.tab.module.Document;
 import com.dommy.tab.module.Project;
@@ -50,12 +51,14 @@ public class ProjectsDetailActivity extends AppCompatActivity {
     private TextView progress;
     private TextView status;
     private TextView time;
-    private TextView member;
+    private TextView Tmember;
+    private TextView Smember;
     private TextView decoration;
     private TextView achieve;
     private RecyclerView docRecycle;
     private RecyclerView historyRecycle;
     private ProjectDetailItemAdapter projectDetailItemAdapter;
+    private ProjectHistoryItemAdapter projectHistoryItemAdapter;
 
 
     @Override
@@ -71,19 +74,24 @@ public class ProjectsDetailActivity extends AppCompatActivity {
 
     private void init(){
         progressDialog = new ProgressDialog(this);//进度条
+        progressDialog.setCancelable(false);
 
         docRecycle=(RecyclerView)findViewById(R.id.doc_recycle) ;
         docRecycle.setLayoutManager(new LinearLayoutManager(this));
+        historyRecycle=(RecyclerView)findViewById(R.id.history_recycle) ;
+        historyRecycle.setLayoutManager(new LinearLayoutManager(this));
         projectDetailItemAdapter = new ProjectDetailItemAdapter(null);
+        projectHistoryItemAdapter=new ProjectHistoryItemAdapter(null);
         docRecycle.setAdapter(projectDetailItemAdapter);
+        historyRecycle.setAdapter(projectHistoryItemAdapter);
 
-        progressDialog.setCancelable(false);
         title=(TextView) findViewById(R.id.project_detail_title);
         manager=(TextView) findViewById(R.id.project_detail_manager);
         progress=(TextView) findViewById(R.id.project_detail_progress);
         status=(TextView) findViewById(R.id.project_detail_status);
         time=(TextView) findViewById(R.id.project_detail_time);
-        member=(TextView) findViewById(R.id.project_detail_member);
+        Tmember=(TextView) findViewById(R.id.project_detail_Tmember);
+        Smember=(TextView)findViewById(R.id.project_detail_Smember) ;
         decoration=(TextView) findViewById(R.id.project_detail_dec);
         achieve=(TextView) findViewById(R.id.project_detail_achieve);
     }
@@ -108,14 +116,29 @@ public class ProjectsDetailActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        hideDialog();
+
                         ProjectDetail results = new Gson().fromJson(response.body().toString(), ProjectDetail.class);
                         if (results != null) {
+                            String type="";
+                            switch (results.getStatus()){
+                                case 1: type="报名中";
+                                    break;
+                                case 2:type="进行中";
+                                    break;
+                                case 3:type="已完成";
+                                    break;
+                                default:type="无";
+                                    break;
+                            }
+
+
                              title.setText(results.getTitle());
-                             manager.setText(results.getPeople_name());
-                             progress.setText("进度：60%");status.setText(results.getStatus()+"");
+                             manager.setText("负责人:"+results.getPeople_name());
+                             progress.setText("进度:60%");
+                             status.setText(type);
                              time.setText(results.getDate_start());
-                             member.setText(results.memberToString());
+                             Tmember.setText("老师:"+results.TmemberToString());
+                             Smember.setText("学生:"+results.SmemberToString());
                              decoration.setText(results.getDescription());
                         }
                     }
@@ -132,10 +155,12 @@ public class ProjectsDetailActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+
                         hideDialog();
                         List<Document> results = new Gson().fromJson(response.body(), new TypeToken<List<Document>>(){}.getType());
                         if (results != null) {
                             projectDetailItemAdapter.setNewData(results);
+                            projectHistoryItemAdapter.setNewData(results);
                         }
                     }
 
