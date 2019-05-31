@@ -21,6 +21,8 @@ public class Achievements {
         private String member_num;
         @SerializedName("date")
         private String time_start;
+        @SerializedName("achi_type")
+        private int achieve_type;
 
         public String getId() {
         return id;
@@ -41,13 +43,15 @@ public class Achievements {
         public String getTime_start() {
         return time_start;
         }
+        public int getAchieve_type(){return achieve_type;}
 
-        public Achievements(String id,String title, String teacher, String member_num, String time_start) {
+        public Achievements(String id,String title, String teacher, String member_num, String time_start,int achieve_type) {
         this.id=id;
         this.title = title;
         this.teacher = teacher;
         this.member_num = member_num;
         this.time_start = time_start;
+        this.achieve_type=achieve_type;
         }
         }
 

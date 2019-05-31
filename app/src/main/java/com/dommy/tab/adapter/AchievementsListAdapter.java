@@ -7,6 +7,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.dommy.tab.R;
 import com.dommy.tab.module.Achievements;
 import com.dommy.tab.module.Projects;
+import com.dommy.tab.ui.AchievementsDetailActivity;
+import com.dommy.tab.ui.ProjectsDetailActivity;
 
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class AchievementsListAdapter extends BaseQuickAdapter<Achievements,BaseV
             @Override
             public void onClick(View v) {
                 //进入projectdetail页面逻辑WebActivity.runActivity(mContext, model.desc, model.url);
+                AchievementsDetailActivity.runActivity(mContext,item.getId(),item.getAchieve_type());
             }
         });
     }
