@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dommy.tab.BaseActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.adapter.ProjectDetailItemAdapter;
 import com.dommy.tab.adapter.ProjectHistoryItemAdapter;
@@ -28,20 +29,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dommy.tab.utils.ApiConfig.URL_COPYRIGHTDETAIL;
-import static com.dommy.tab.utils.ApiConfig.URL_MYPAPER;
-import static com.dommy.tab.utils.ApiConfig.URL_MYPATENT;
 import static com.dommy.tab.utils.ApiConfig.URL_PAPERDETAIL;
 import static com.dommy.tab.utils.ApiConfig.URL_PATENTDETAIL;
 import static com.dommy.tab.utils.ApiConfig.URL_PROJECTDETAIL;
 import static com.dommy.tab.utils.ApiConfig.URL_ProjectDoc;
 
 
-public class AchievementsDetailActivity extends AppCompatActivity {
+public class AchievementsDetailActivity extends BaseActivity {
 
     private static final String TAG = MyAssessmentsActivity.class.getSimpleName();
 
     private ProgressDialog progressDialog;
-    private String achieveId;
+    private String achieveStringId;
+    private int achieveIntId;
+    private String ID="";
     private int achieveType;
     private TextView title;
     private TextView project;
@@ -70,7 +71,15 @@ public class AchievementsDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement_detail);
         Intent getIntent=getIntent();
-        achieveId=getIntent.getStringExtra("id");
+        int from=getIntent.getIntExtra("from",-1);
+        if (from==1){
+            achieveStringId=getIntent.getStringExtra("string_id");
+            ID=achieveStringId;
+        }else {
+            achieveIntId=getIntent.getIntExtra("int_id",-1);
+            ID=String.valueOf(achieveIntId);
+        }
+
         achieveType=getIntent.getIntExtra("type",-1);
 
         init();
@@ -111,21 +120,33 @@ public class AchievementsDetailActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
         OkGo.getInstance().cancelTag(this);
     }
-    public static void runActivity(Context context, String id,int type) {
+    public static void runActivity(Context context, String id,int type,int from) {
         Intent intent = new Intent(context, AchievementsDetailActivity.class);
-        intent.putExtra("id",id);
+        intent.putExtra("from",from);
+        intent.putExtra("string_id",id);
         intent.putExtra("type",type);
         context.startActivity(intent);
     }
+    public static void runActivity(Context context, int id,int type,int from) {
+        Intent intent = new Intent(context, AchievementsDetailActivity.class);
+        intent.putExtra("from",from);
+        intent.putExtra("int_id",id);
+        intent.putExtra("type",type);
+        context.startActivity(intent);
+    }
+
     public void onFresh() {
         progressDialog.setMessage("加载中...");
         showDiaglog();
         switch (achieveType){
             case 1:
                 url=URL_PAPERDETAIL;
-                OkGo.<String>get(url+"?id="+achieveId)//
+                OkGo.<String>get(url+"?id="+ID)//
                         .tag(this)
                         .execute(new StringCallback() {
                             @Override
@@ -150,20 +171,19 @@ public class AchievementsDetailActivity extends AppCompatActivity {
                                     }
                                     status.setText(s);
                                     time.setText(results.getDate_deliver());
-                                    member1.setText(""+results.getAuthor1_name());
-                                    member2.setText(""+results.getAuthor2_name());
-                                    member3.setText(""+results.getAuthor3_name());
-                                    member4.setText(""+results.getAuthor4_name());
-                                    member5.setText(""+results.getAuthor5_name());
-                                    member6.setText(""+results.getAuthor6_name());
-                                    member7.setText(""+results.getAuthor7_name());
-                                    member8.setText(""+results.getAuthor8_name());
-                                    detail_p1.setText(""+results.getJournal());
-                                    detail_p2.setText(""+results.getDate_deliver());
-                                    detail_p3.setText(""+results.getDate_pass());
-                                    detail_p4.setText(""+results.getDate_pub());
-                                    detail_p5.setText(""+results.getIndex_number());
-
+                                    member1.setText("1："+results.getAuthor1_name());
+                                    member2.setText("2："+results.getAuthor2_name());
+                                    member3.setText("3："+results.getAuthor3_name());
+                                    member4.setText("4："+results.getAuthor4_name());
+                                    member5.setText("5："+results.getAuthor5_name());
+                                    member6.setText("6："+results.getAuthor6_name());
+                                    member7.setText("7："+results.getAuthor7_name());
+                                    member8.setText("8："+results.getAuthor8_name());
+                                    detail_p1.setText("期刊名称:"+results.getJournal());
+                                    detail_p2.setText("投递日期:"+results.getDate_deliver());
+                                    detail_p3.setText("过审日期:"+results.getDate_pass());
+                                    detail_p4.setText("发表日期:"+results.getDate_pub());
+                                    detail_p5.setText("索引号:"+results.getIndex_number());
                                     achieve_abstract.setText(results.getAbstractX());
                                     doc.setText(results.getDoc_name());
                                 }

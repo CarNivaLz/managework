@@ -58,26 +58,19 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
     private CopyrightAdapter copyrightAdapter;
     private PatentAdapter patentAdapter;
     private ProjectAdapter projectAdapter;
-
-    private boolean isInitCache = false;
-    public static MyProfileListContentFragment newInstance() {
-        return new MyProfileListContentFragment();
-    }
-
-    List<Paper> paperList =new ArrayList<>();
-    List<Patent> patentList =new ArrayList<>();
-    List<Copyright> copyrightList =new ArrayList<>();
-
     private int name;
     private String url;
     private ProgressDialog progressDialog;
     public MyProfileListContentFragment(){}
 
-//    @Override
-//    public void onAttach(Context context) {
-//        this.context = context;
-//        super.onAttach(context);
-//    }
+    public static MyProfileListContentFragment newInstance() {
+        return new MyProfileListContentFragment();
+    }
+    @Override
+    public void onAttach(Context context) {
+        this.context = context;
+        super.onAttach(context);
+    }
 
 //    @Override
 //    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -150,17 +143,10 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
         progressDialog.setMessage("加载中...");
         showDiaglog();
         OkGo.<String>get(url)//
-                .cacheKey("ProfileFragment_" + name)       //由于该fragment会被复用,必须保证key唯一,否则数据会发生覆盖
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)  //缓存模式先使用缓存,然后使用网络数据
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         hideDialog();
-//                        List<Paper> results2 = new Gson().fromJson(response.body(), new TypeToken<List<Paper>>(){}.getType());
-//                        paperAdapter.setNewData(results2);
-//                                if (results2 != null) {
-//                                    paperAdapter.setNewData(results2);
-//                                }
                         switch (name){
                             case 1:
                                 List<Project> results1 = new Gson().fromJson(response.body(), new TypeToken<List<Project>>(){}.getType());
@@ -188,16 +174,6 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
                                 break;
                             default:
                                 Toast.makeText(getContext(),"error",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCacheSuccess(Response<String> response) {
-                        //一般来说,只需呀第一次初始化界面的时候需要使用缓存刷新界面,以后不需要,所以用一个变量标识
-                        if (!isInitCache) {
-                            //一般来说,缓存回调成功和网络回调成功做的事情是一样的,所以这里直接回调onSuccess
-                            onSuccess(response);
-                            isInitCache = true;
                         }
                     }
 
@@ -241,6 +217,14 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
 
     }
 
+    @Override
+    public void onDestroyView(){
+        if (progressDialog !=null) {
+            progressDialog.dismiss();
+        }
+        super.onDestroyView();
+    }
+
     //显示进度条
     private void showDiaglog() {
         if (!progressDialog.isShowing()) {
@@ -261,9 +245,6 @@ public class MyProfileListContentFragment extends Fragment implements SwipeRefre
                 refreshLayout.setRefreshing(refreshing);
             }
         });
-    }
-    public void showToast(String msg) {
-        Snackbar.make(recyclerView, msg, Snackbar.LENGTH_SHORT).show();
     }
 
 }

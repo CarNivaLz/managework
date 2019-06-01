@@ -34,7 +34,7 @@ public class MyProfileActivity extends BaseActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framelayout,fragment);
+        fragmentTransaction.add(R.id.framelayout,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         fragment.setArguments(bundle);//数据传递到fragment中
@@ -46,11 +46,11 @@ public class MyProfileActivity extends BaseActivity {
         //Activity销毁时，取消网络请求
         OkGo.getInstance().cancelTag(this);
     }
-    @Override
-    public void onStop(){
-        super.onStop();
-        AppManager.getAppManager().finishActivity(this);
-    }
+//    @Override
+//    public void onStop(){
+//        super.onStop();
+//        AppManager.getAppManager().finishActivity(this);
+//    }
     @Override
     public void onBackPressed(){
         AppManager.getAppManager().finishActivity(this);

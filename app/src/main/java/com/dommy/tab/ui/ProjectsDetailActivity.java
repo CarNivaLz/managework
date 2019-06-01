@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dommy.tab.BaseActivity;
 import com.dommy.tab.R;
 import com.dommy.tab.adapter.MyAssessmentListAdapter;
 import com.dommy.tab.adapter.ProjectDetailItemAdapter;
@@ -39,10 +40,9 @@ import static com.dommy.tab.utils.ApiConfig.URL_MYASSESSMENT;
 import static com.dommy.tab.utils.ApiConfig.URL_PROJECTDETAIL;
 import static com.dommy.tab.utils.ApiConfig.URL_ProjectDoc;
 
-public class ProjectsDetailActivity extends AppCompatActivity {
+public class ProjectsDetailActivity extends BaseActivity {
 
     private static final String TAG = MyAssessmentsActivity.class.getSimpleName();
-    List<ProjectDetail> projectDetailList = new ArrayList<>();
 
     private ProgressDialog progressDialog;
     private int projId;
@@ -101,6 +101,9 @@ public class ProjectsDetailActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
         OkGo.getInstance().cancelTag(this);
     }
     public static void runActivity(Context context,  int projectId) {
@@ -116,7 +119,7 @@ public class ProjectsDetailActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-
+                        progressDialog.hide();
                         ProjectDetail results = new Gson().fromJson(response.body().toString(), ProjectDetail.class);
                         if (results != null) {
                             String type="";
@@ -186,5 +189,6 @@ public class ProjectsDetailActivity extends AppCompatActivity {
             progressDialog.hide();
         }
     }
+
 
 }
