@@ -25,7 +25,7 @@
             android:layout_marginRight="8dp"
             android:orientation="vertical">
             <RelativeLayout
-android:id="@+id/s_time_sta"
+                android:id="@+id/s_time_sta"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -47,11 +47,22 @@ android:id="@+id/s_time_sta"
                     android:textColor="@color/starTextColor"
                     android:textSize="@dimen/star_text_size" />
                 <ImageView
+                    android:id="@+id/p1"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/right_sight" />
+                <TextView
+                    android:id="@+id/show_times"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toLeftOf="@id/p1"
+                    android:text="开始时间"
+                    android:textColor="@color/starTextColor"
+                    android:textSize="@dimen/star_text_size" />
             </RelativeLayout>
             <View
                 android:layout_width="fill_parent"
@@ -79,11 +90,22 @@ android:id="@+id/s_time_sta"
                     android:textColor="@color/starTextColor"
                     android:textSize="@dimen/star_text_size" />
                 <ImageView
+                    android:id="@+id/p2"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/right_sight" />
+                <TextView
+                    android:id="@+id/show_timef"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toLeftOf="@id/p2"
+                    android:text="截止时间"
+                    android:textColor="@color/starTextColor"
+                    android:textSize="@dimen/star_text_size" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -104,7 +126,7 @@ android:id="@+id/s_time_sta"
             android:layout_marginRight="8dp"
             android:orientation="vertical">
             <RelativeLayout
-android:id="@+id/s_name"
+                android:id="@+id/s_name"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -126,18 +148,29 @@ android:id="@+id/s_name"
                     android:textColor="@color/starTextColor"
                     android:textSize="@dimen/star_text_size" />
                 <ImageView
+                    android:id="@+id/p3"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/right_sight" />
+                <TextView
+                    android:id="@+id/show_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toLeftOf="@id/p3"
+                    android:text="开始时间"
+                    android:textColor="@color/starTextColor"
+                    android:textSize="@dimen/star_text_size" />
             </RelativeLayout>
             <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/divider_line_color" />
             <RelativeLayout
-android:id="@+id/s_member"
+                android:id="@+id/s_member"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -158,18 +191,29 @@ android:id="@+id/s_member"
                     android:textColor="@color/starTextColor"
                     android:textSize="@dimen/star_text_size" />
                 <ImageView
+                    android:id="@+id/p4"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/right_sight" />
+                <TextView
+                    android:id="@+id/show_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toLeftOf="@id/p4"
+                    android:text="开始时间"
+                    android:textColor="@color/starTextColor"
+                    android:textSize="@dimen/star_text_size" />
             </RelativeLayout>
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@color/divider_line_color" />
             <RelativeLayout
-android:id="@+id/s_category"
+                android:id="@+id/s_category"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -190,11 +234,22 @@ android:id="@+id/s_category"
                     android:textColor="@color/starTextColor"
                     android:textSize="@dimen/star_text_size" />
                 <ImageView
+                    android:id="@+id/p5"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/right_sight" />
+                <TextView
+                    android:id="@+id/show_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toLeftOf="@id/p5"
+                    android:text=""
+                    android:textColor="@color/starTextColor"
+                    android:textSize="@dimen/star_text_size" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -57,8 +57,8 @@ public class SearchResultsActivity extends BaseActivity {
         Intent intent = getIntent();
          input_date_sta = intent.getStringExtra("date_s");
          input_date_fin = intent.getStringExtra("date_f");
-         input_name = intent.getStringExtra("input_name");
-         input_member = intent.getStringExtra("input_member");
+         input_name = intent.getStringExtra("name");
+         input_member = intent.getStringExtra("member");
          input_category = (ArrayList<Integer>) getIntent().getIntegerArrayListExtra("category");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,7 +78,7 @@ public class SearchResultsActivity extends BaseActivity {
         }
         showDiaglog();
         String url="";
-        url=URL_SEARCH+"?"+"name="+input_name+"&people_name="+input_member+"&startTime="+input_date_sta+"&endTime="+input_date_fin+cat_num;
+        url=URL_SEARCH+"?"+"name="+input_name+"&people_name="+input_member+"&start_time="+input_date_sta+"&end_time="+input_date_fin+cat_num;
         url=url.replace("null","");
         OkGo.<String>get(url)//
                 .tag(this)

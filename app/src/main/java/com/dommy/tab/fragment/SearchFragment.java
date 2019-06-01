@@ -1,31 +1,24 @@
 package com.dommy.tab.fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dommy.tab.MainActivity;
 import com.dommy.tab.R;
-import com.dommy.tab.module.SearchResults;
-import com.dommy.tab.ui.ProjectsDetailActivity;
 import com.dommy.tab.ui.SearchResultsActivity;
 import com.fantasy.doubledatepicker.DoubleDateSelectDialog;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +36,18 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private String allowedSmallestTime = "2012-1-1";
     private String allowedBiggestTime = "2025-12-12";
 
-    private String input_member=null;
-    private String input_name=null;
-    private String input_date_sta=null;
-    private String input_date_fin=null;
+    private String input_member="";
+    private String input_name="";
+    private String input_date_sta="";
+    private String input_date_fin="";
     private ArrayList<Integer> input_category=new ArrayList<>();
+
+    private TextView show_times;
+    private TextView show_timef;
+    private TextView show_name;
+    private TextView show_member;
+    private TextView show_category;
+
 
     private DoubleDateSelectDialog mDoubleTimeSelectDialog;
 
@@ -72,6 +72,20 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         s_member = (RelativeLayout) v.findViewById(R.id.s_member);
         s_category = (RelativeLayout) v.findViewById(R.id.s_category);
         s_send=(RelativeLayout) v.findViewById(R.id.s_send) ;
+        show_times=(TextView) v.findViewById(R.id.show_times) ;
+        show_times.setText(input_date_sta);
+//        show_times.setVisibility(View.GONE);
+        show_timef=(TextView) v.findViewById(R.id.show_timef) ;
+        show_timef.setText(input_date_fin);
+//        show_timef.setVisibility(View.GONE);
+        show_name=(TextView) v.findViewById(R.id.show_name) ;
+        show_name.setText(input_name);
+//        show_name.setVisibility(View.GONE);
+        show_member=(TextView) v.findViewById(R.id.show_member) ;
+        show_member.setText(input_member);
+//        show_member.setVisibility(View.GONE);
+        show_category=(TextView) v.findViewById(R.id.show_category) ;
+//        show_category.setVisibility(View.GONE);
         setListener();
     }
 
@@ -99,6 +113,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     intent.putExtra("name",input_name);
                     intent.putExtra("member",input_member);
                     intent.putIntegerArrayListExtra("category",input_category);
+
                     startActivity(intent);
                 }
                 break;
@@ -113,45 +128,33 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 new LovelyTextInputDialog(this.getContext(), R.style.EditTextTintTheme)
                         .setTopColorRes(R.color.white)
                         .setTitle("请输入查询名称")
-//                        .setMessage(R.string.text_input_message)
                         .setIcon(R.drawable.tittle_name)
-//                        .setInstanceStateHandler(ID_TEXT_INPUT_DIALOG, saveStateHandler)
-                        .setInputFilter("请输入名称", new LovelyTextInputDialog.TextFilter() {
+                        .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
                             @Override
-                            public boolean check(String text) {
-                                input_name=null;
+                            public void onTextInputConfirmed(String text) {
                                 input_name=text;
-                                return text.matches("\\w+");
+                                show_name.setText(text);
+                                show_name.setVisibility(View.VISIBLE);
                             }
                         })
-                        .setConfirmButton(android.R.string.ok,text ->
-                                Toast.makeText(
-                                        getActivity(), text,
-                                        Toast.LENGTH_SHORT)
-                                        .show())
                         .setNegativeButton(android.R.string.no, null)
+
                         .show();
+
                 break;
             case R.id.s_member:
                 new LovelyTextInputDialog(this.getContext(), R.style.EditTextTintTheme)
                         .setTopColorRes(R.color.white)
                         .setTitle("请输入查询成员姓名")
-//                        .setMessage(R.string.text_input_message)
                         .setIcon(R.drawable.tittle_member)
-//                        .setInstanceStateHandler(ID_TEXT_INPUT_DIALOG, saveStateHandler)
-                        .setInputFilter("请输入姓名", new LovelyTextInputDialog.TextFilter() {
+                        .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
                             @Override
-                            public boolean check(String text) {
-                                input_member=null;
+                            public void onTextInputConfirmed(String text) {
                                 input_member=text;
-                                return text.matches("\\w+");
+                                show_member.setText(text);
+                                show_member.setVisibility(View.VISIBLE);
                             }
                         })
-                        .setConfirmButton(android.R.string.ok,text ->
-                                Toast.makeText(
-                                        getActivity(), text,
-                                        Toast.LENGTH_SHORT)
-                                        .show())
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 break;
@@ -165,9 +168,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                             public void onItemsSelected(List<Integer> positions, List<String> items) {
                                 input_category.clear();
                                 input_category.addAll(positions);
-
-                                Toast.makeText(getContext(),TextUtils.join("\n", items)+input_category.size(),Toast.LENGTH_SHORT).show();
-
+//                                Toast.makeText(getContext(),TextUtils.join("\n", items)+input_category.size(),Toast.LENGTH_SHORT).show();
+                                show_category.setText(TextUtils.join("\\", items));
                             }
                         })
                         .setConfirmButtonText("确认")
@@ -187,6 +189,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity(),"您选择的时间范围为"+startTime+"到"+endTime,Toast.LENGTH_SHORT).show();
                     input_date_sta=startTime;
                     input_date_fin=endTime;
+                    show_times.setText(startTime);
+                    show_times.setVisibility(View.VISIBLE);
+                    show_timef.setText(endTime);
+                    show_timef.setVisibility(View.VISIBLE);
                 }
             });
 

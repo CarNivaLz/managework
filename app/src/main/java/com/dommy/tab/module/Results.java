@@ -1,5 +1,7 @@
 package com.dommy.tab.module;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Results {
     /**
      * id : 57c83777421aa97cbd81c74d
@@ -10,9 +12,13 @@ public class Results {
      */
 
     private int id;
+    @SerializedName("name")
     private String tittle;
+    @SerializedName("type")
     private int position1;
+    @SerializedName("people_name")
     private String position2;
+    @SerializedName("date")
     private String position3;
 
     public int getId() {
