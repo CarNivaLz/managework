@@ -89,6 +89,8 @@ public class SearchResultsActivity extends BaseActivity {
                         List<Results> results = new Gson().fromJson(response.body(), new TypeToken<List<Results>>(){}.getType());
                         if (results != null) {
                             searchResultListAdapter.setNewData(results);
+                        }else {
+                            Toast.makeText(getApplicationContext(),"没有找到结果",Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
