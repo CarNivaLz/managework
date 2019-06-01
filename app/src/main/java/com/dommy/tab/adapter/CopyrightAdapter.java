@@ -30,7 +30,7 @@ public class CopyrightAdapter extends BaseQuickAdapter<Copyright,BaseViewHolder>
         }
         baseViewHolder.setText(R.id.tittle,item.getTitle())
                 .setText(R.id.position1,"版权号："+item.getNumber())
-                .setText(R.id.position2,"状态："+item.getStatus())
+                .setText(R.id.position2,"状态："+status)
                 .setText(R.id.position3,item.getDate());
         View view = baseViewHolder.getConvertView();
         view.setOnClickListener(new View.OnClickListener() {

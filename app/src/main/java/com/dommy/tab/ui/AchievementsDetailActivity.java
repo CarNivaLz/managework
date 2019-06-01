@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -163,10 +164,10 @@ public class AchievementsDetailActivity extends BaseActivity {
                                     member6.setText("6："+results.getAuthor6_name());
                                     member7.setText("7："+results.getAuthor7_name());
                                     member8.setText("8："+results.getAuthor8_name());
-                                    detail_p1.setText("期刊名称:"+results.getJournal());
-                                    detail_p2.setText("投递日期:"+results.getDate_deliver());
-                                    detail_p3.setText("过审日期:"+results.getDate_pass());
-                                    detail_p4.setText("发表日期:"+results.getDate_pub());
+                                    detail_p1.setText("期刊名称："+results.getJournal());
+                                    detail_p2.setText("投递日期："+results.getDate_deliver());
+                                    detail_p3.setText("过审日期："+results.getDate_pass());
+                                    detail_p4.setText("发表日期："+results.getDate_pub());
                                     detail_p5.setText("索引号:"+results.getIndex_number());
                                     achieve_abstract.setText(results.getAbstractX());
                                     doc.setText(results.getDoc_name());
@@ -215,11 +216,11 @@ public class AchievementsDetailActivity extends BaseActivity {
                                     member6.setText("6："+results.getAuthor6_name());
                                     member7.setText("7："+results.getAuthor7_name());
                                     member8.setText("8："+results.getAuthor8_name());
-                                    detail_p1.setText("专利信息:"+results.getInfo());
-                                    detail_p2.setText("专利申请号:"+results.getNum_acceptance());
-                                    detail_p3.setText("专利申请日期:"+results.getDate_acceptance());
-                                    detail_p4.setText("专利授权号:"+results.getNum_authorization());
-                                    detail_p5.setText("专利授权日期:"+results.getDate_authorization());
+                                    detail_p1.setText("专利信息："+results.getInfo());
+                                    detail_p2.setText("专利申请号："+results.getNum_acceptance());
+                                    detail_p3.setText("专利申请日期："+results.getDate_acceptance());
+                                    detail_p4.setText("专利授权号："+results.getNum_authorization());
+                                    detail_p5.setText("专利授权日期："+results.getDate_authorization());
                                     achieve_abstract.setText(results.getAbstractX());
                                     doc.setText(results.getDoc_name());
                                 }
@@ -261,11 +262,11 @@ public class AchievementsDetailActivity extends BaseActivity {
                                     member6.setText("6："+results.getAuthor6_name());
                                     member7.setText("7："+results.getAuthor7_name());
                                     member8.setText("8："+results.getAuthor8_name());
-                                    detail_p1.setText("发表日期:"+results.getDate());
-                                    detail_p2.setText("版权号:"+results.getNumber());
-                                    detail_p3.setText("");
-                                    detail_p4.setText("");
-                                    detail_p5.setText("");
+                                    detail_p1.setText("发表日期："+results.getDate());
+                                    detail_p2.setText("版权号："+results.getNumber());
+                                    detail_p3.setVisibility(View.GONE);
+                                    detail_p4.setVisibility(View.GONE);
+                                    detail_p5.setVisibility(View.GONE);
                                     achieve_abstract.setText(results.getAbstractX());
                                     doc.setText(results.getDoc_name());
                                 }
