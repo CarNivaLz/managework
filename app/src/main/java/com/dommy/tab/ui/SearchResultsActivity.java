@@ -32,7 +32,7 @@ import static com.dommy.tab.utils.ApiConfig.URL_SEARCH;
 public class SearchResultsActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
-    List<Results> resultsList =new ArrayList<>();
+
     private SearchResultListAdapter searchResultListAdapter;
     private ProgressDialog progressDialog;
 
@@ -61,35 +61,33 @@ public class SearchResultsActivity extends BaseActivity {
          input_member = intent.getStringExtra("input_member");
          input_category = (ArrayList<Integer>) getIntent().getIntegerArrayListExtra("category");
 
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchResultListAdapter = new SearchResultListAdapter(null);
-        searchResultListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         searchResultListAdapter.isFirstOnly(false);
         recyclerView.setAdapter(searchResultListAdapter);
-
-
         initDatas();
     }
 
 
     private void initDatas() {
-//        progressDialog = new ProgressDialog(getApplicationContext());//进度条
-//        progressDialog.setCancelable(false);
+        progressDialog = new ProgressDialog(this);//进度条
+        progressDialog.setCancelable(false);
         String cat_num="";
         for (Integer i:input_category){
-            cat_num="&type="+i;
+            cat_num=cat_num+"&type="+i;
         }
-//        showDiaglog();
-        OkGo.<String>get(URL_SEARCH+"?"+"people_name="+input_member+"&startTime="+input_date_sta+"&endTime="+input_date_fin+cat_num)//
+        showDiaglog();
+        String url="";
+        url=URL_SEARCH+"?"+"name="+input_name+"&people_name="+input_member+"&startTime="+input_date_sta+"&endTime="+input_date_fin+cat_num;
+        url=url.replace("null","");
+        OkGo.<String>get(url)//
                 .tag(this)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-//                        hideDialog();
+                        hideDialog();
                         List<Results> results = new Gson().fromJson(response.body(), new TypeToken<List<Results>>(){}.getType());
                         if (results != null) {
-//                            currentPage = 2;
                             searchResultListAdapter.setNewData(results);
                         }
                     }
@@ -119,6 +117,9 @@ public class SearchResultsActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
         OkGo.getInstance().cancelTag(this);
     }
 }

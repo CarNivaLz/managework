@@ -62,11 +62,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
-
-
-
-
     </LinearLayout>
     <View  android:layout_height="1px"
         android:layout_marginLeft="10dp"

@@ -163,10 +163,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                         .setItemsMultiChoice(items, new LovelyChoiceDialog.OnItemsSelectedListener<String>() {
                             @Override
                             public void onItemsSelected(List<Integer> positions, List<String> items) {
-                                TextUtils.join("\n", items);
-                                    for (Integer num:positions ){
-                                        input_category.add(num);
-                                    }
+                                input_category.clear();
+                                input_category.addAll(positions);
+
+                                Toast.makeText(getContext(),TextUtils.join("\n", items)+input_category.size(),Toast.LENGTH_SHORT).show();
 
                             }
                         })

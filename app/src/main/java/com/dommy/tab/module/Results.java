@@ -9,13 +9,13 @@ public class Results {
      * time_start : 2019.3.30
      */
 
-    private String id;
+    private int id;
     private String tittle;
-    private String teacher;
-    private String member_num;
-    private String time_start;
+    private int position1;
+    private String position2;
+    private String position3;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -23,23 +23,19 @@ public class Results {
         return tittle;
     }
 
-    public String getTeacher() {
-        return teacher;
+    public int getPosition1() {
+        return position1;
     }
 
-    public String getMember_num() {
-        return member_num;
+    public String getPosition2() {
+        return position2;
     }
 
-    public String getTime_start() {
-        return time_start;
+    public String getPosition3() {
+        return position3;
     }
 
-    public Results(String id, String title, String teacher, String member_num, String time_start) {
-        this.id=id;
-        this.tittle = title;
-        this.teacher = teacher;
-        this.member_num = member_num;
-        this.time_start = time_start;
-    }
+
+
+
 }

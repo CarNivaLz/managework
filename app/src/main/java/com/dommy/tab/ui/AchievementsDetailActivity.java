@@ -71,12 +71,7 @@ public class AchievementsDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement_detail);
         Intent getIntent=getIntent();
-
-
         achieveIntId=getIntent.getIntExtra("id",-1);
-
-
-
         achieveType=getIntent.getIntExtra("type",-1);
 
         init();
@@ -135,8 +130,7 @@ public class AchievementsDetailActivity extends BaseActivity {
         showDiaglog();
         switch (achieveType){
             case 1:
-                url=URL_PAPERDETAIL;
-                OkGo.<String>get(url+"?id="+achieveIntId)//
+                OkGo.<String>get(URL_PAPERDETAIL+"?id="+achieveIntId)//
                         .tag(this)
                         .execute(new StringCallback() {
                             @Override
@@ -185,59 +179,104 @@ public class AchievementsDetailActivity extends BaseActivity {
                             }
                         });
                 break;
-//            case 2:
-//                url=URL_PATENTDETAIL;
-//                OkGo.<String>get(url+"?id="+achieveId)//
-//                        .tag(this)
-//                        .execute(new StringCallback() {
-//                            @Override
-//                            public void onSuccess(Response<String> response) {
-//                                Patent results = new Gson().fromJson(response.body().toString(), Patent.class);
-//                                if (results != null) {
-//                                    title.setText();
-//                                    project.setText();
-//                                    status.setText();
-//                                    time.setText();
-//                                    member.setText();
-//                                    decoration.setText();
-//                                    achieve_abstract.setText();
-//                                    doc.setText();
-//                                }
-//                            }
-//                            @Override
-//                            public void onError(Response<String> response) {
-//                                //网络请求失败的回调,一般会弹个Toast
-//                                Toast.makeText(getApplicationContext(),"网络请求失败",Toast.LENGTH_LONG).show();
-//                                title.setText();
-//                                project.setText();
-//                                status.setText();
-//                                time.setText();
-//                                member.setText();
-//                                decoration.setText();
-//                                achieve_abstract.setText();
-//                                doc.setText();
-//                            }
-//                        });
-//                break;
-//            case 3:
-//                url=URL_COPYRIGHTDETAIL;
-//                OkGo.<String>get(url+"?id="+achieveId)//
-//                        .tag(this)
-//                        .execute(new StringCallback() {
-//                            @Override
-//                            public void onSuccess(Response<String> response) {
-//                                Copyright results = new Gson().fromJson(response.body().toString(), Copyright.class);
-//                                if (results != null) {
-//
-//                                }
-//                            }
-//                            @Override
-//                            public void onError(Response<String> response) {
-//                                //网络请求失败的回调,一般会弹个Toast
-//                                Toast.makeText(getApplicationContext(),"网络请求失败",Toast.LENGTH_LONG).show();
-//                            }
-//                        });
-//                break;
+            case 3:
+                OkGo.<String>get(URL_PATENTDETAIL+"?id="+achieveIntId)//
+                        .tag(this)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                progressDialog.hide();
+                                Patent results = new Gson().fromJson(response.body().toString(), Patent.class);
+                                if (results != null) {
+                                    title.setText(results.getTitle());
+                                    project.setText(results.getProject_name());
+                                    String s="";
+                                    switch (results.getStatus()){
+                                        case 1:s="已申请";
+                                            break;
+                                        case 2:s="已受理";
+                                            break;
+                                        case 3:s="已公布";
+                                            break;
+                                        case 4:s="已授权";
+                                            break;
+                                        case 0:s="失败";
+                                            break;
+                                        default:s="无";
+                                            break;
+                                    }
+                                    status.setText(s);
+                                    time.setText(results.getDate_acceptance());
+                                    member1.setText("1："+results.getAuthor1_name());
+                                    member2.setText("2："+results.getAuthor2_name());
+                                    member3.setText("3："+results.getAuthor3_name());
+                                    member4.setText("4："+results.getAuthor4_name());
+                                    member5.setText("5："+results.getAuthor5_name());
+                                    member6.setText("6："+results.getAuthor6_name());
+                                    member7.setText("7："+results.getAuthor7_name());
+                                    member8.setText("8："+results.getAuthor8_name());
+                                    detail_p1.setText("专利信息:"+results.getInfo());
+                                    detail_p2.setText("专利申请号:"+results.getNum_acceptance());
+                                    detail_p3.setText("专利申请日期:"+results.getDate_acceptance());
+                                    detail_p4.setText("专利授权号:"+results.getNum_authorization());
+                                    detail_p5.setText("专利授权日期:"+results.getDate_authorization());
+                                    achieve_abstract.setText(results.getAbstractX());
+                                    doc.setText(results.getDoc_name());
+                                }
+                            }
+                            @Override
+                            public void onError(Response<String> response) {
+                                //网络请求失败的回调,一般会弹个Toast
+                                Toast.makeText(getApplicationContext(),"网络请求失败",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                break;
+            case 2:
+                OkGo.<String>get(URL_COPYRIGHTDETAIL+"?id="+achieveIntId)//
+                        .tag(this)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                progressDialog.hide();
+                                Copyright results = new Gson().fromJson(response.body().toString(), Copyright.class);
+                                if (results != null) {
+                                    String s="";
+                                    switch (results.getStatus()){
+                                        case 0: s="未发表";
+                                            break;
+                                        case 1:s="已发表";
+                                            break;
+                                        default:s="无";
+                                            break;
+                                    }
+                                    title.setText(results.getTitle());
+                                    project.setText(results.getProject_name());
+                                    status.setText(s);
+                                    time.setText(results.getDate());
+                                    member1.setText("1："+results.getAuthor1_name());
+                                    member2.setText("2："+results.getAuthor2_name());
+                                    member3.setText("3："+results.getAuthor3_name());
+                                    member4.setText("4："+results.getAuthor4_name());
+                                    member5.setText("5："+results.getAuthor5_name());
+                                    member6.setText("6："+results.getAuthor6_name());
+                                    member7.setText("7："+results.getAuthor7_name());
+                                    member8.setText("8："+results.getAuthor8_name());
+                                    detail_p1.setText("发表日期:"+results.getDate());
+                                    detail_p2.setText("版权号:"+results.getNumber());
+                                    detail_p3.setText("");
+                                    detail_p4.setText("");
+                                    detail_p5.setText("");
+                                    achieve_abstract.setText(results.getAbstractX());
+                                    doc.setText(results.getDoc_name());
+                                }
+                            }
+                            @Override
+                            public void onError(Response<String> response) {
+                                //网络请求失败的回调,一般会弹个Toast
+                                Toast.makeText(getApplicationContext(),"网络请求失败",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                break;
         }
 
     }

@@ -37,7 +37,7 @@ public class CopyrightAdapter extends BaseQuickAdapter<Copyright,BaseViewHolder>
             @Override
             public void onClick(View v) {
                 //进入projectdetail页面逻辑WebActivity.runActivity(mContext, model.desc, model.url);
-                AchievementsDetailActivity.runActivity(mContext,item.getId(),1);
+                AchievementsDetailActivity.runActivity(mContext,item.getId(),2);
             }
         });
     }
