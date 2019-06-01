@@ -40,9 +40,9 @@ public class AchievementsDetailActivity extends BaseActivity {
     private static final String TAG = MyAssessmentsActivity.class.getSimpleName();
 
     private ProgressDialog progressDialog;
-    private String achieveStringId;
+
     private int achieveIntId;
-    private String ID="";
+
     private int achieveType;
     private TextView title;
     private TextView project;
@@ -71,14 +71,11 @@ public class AchievementsDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement_detail);
         Intent getIntent=getIntent();
-        int from=getIntent.getIntExtra("from",-1);
-        if (from==1){
-            achieveStringId=getIntent.getStringExtra("string_id");
-            ID=achieveStringId;
-        }else {
-            achieveIntId=getIntent.getIntExtra("int_id",-1);
-            ID=String.valueOf(achieveIntId);
-        }
+
+
+        achieveIntId=getIntent.getIntExtra("id",-1);
+
+
 
         achieveType=getIntent.getIntExtra("type",-1);
 
@@ -125,17 +122,10 @@ public class AchievementsDetailActivity extends BaseActivity {
         }
         OkGo.getInstance().cancelTag(this);
     }
-    public static void runActivity(Context context, String id,int type,int from) {
+
+    public static void runActivity(Context context, int id,int type) {
         Intent intent = new Intent(context, AchievementsDetailActivity.class);
-        intent.putExtra("from",from);
-        intent.putExtra("string_id",id);
-        intent.putExtra("type",type);
-        context.startActivity(intent);
-    }
-    public static void runActivity(Context context, int id,int type,int from) {
-        Intent intent = new Intent(context, AchievementsDetailActivity.class);
-        intent.putExtra("from",from);
-        intent.putExtra("int_id",id);
+        intent.putExtra("id",id);
         intent.putExtra("type",type);
         context.startActivity(intent);
     }
@@ -146,7 +136,7 @@ public class AchievementsDetailActivity extends BaseActivity {
         switch (achieveType){
             case 1:
                 url=URL_PAPERDETAIL;
-                OkGo.<String>get(url+"?id="+ID)//
+                OkGo.<String>get(url+"?id="+achieveIntId)//
                         .tag(this)
                         .execute(new StringCallback() {
                             @Override

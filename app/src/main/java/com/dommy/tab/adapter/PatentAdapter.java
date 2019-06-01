@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.dommy.tab.R;
 import com.dommy.tab.module.Paper;
 import com.dommy.tab.module.Patent;
+import com.dommy.tab.ui.AchievementsDetailActivity;
 
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class PatentAdapter extends BaseQuickAdapter<Patent,BaseViewHolder> {
             @Override
             public void onClick(View v) {
                 //进入projectdetail页面逻辑WebActivity.runActivity(mContext, model.desc, model.url);
+                AchievementsDetailActivity.runActivity(mContext,item.getId(),1);
             }
         });
     }
