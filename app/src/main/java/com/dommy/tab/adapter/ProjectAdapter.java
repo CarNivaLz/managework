@@ -41,7 +41,7 @@ public class ProjectAdapter extends BaseQuickAdapter<Project,BaseViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProjectsDetailActivity.runActivity(mContext,item.getId());
+                ProjectsDetailActivity.runActivity(mContext,item.getId(),item.getTitle());
             }
         });
     }

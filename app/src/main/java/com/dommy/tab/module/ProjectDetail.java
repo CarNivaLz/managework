@@ -19,6 +19,7 @@ public class ProjectDetail {
      * part_tea_name : ["李老师"]
      * people_name : 赵老师
      * status : 3
+     * progress:100
      */
 
     private String date_end;
@@ -32,6 +33,12 @@ public class ProjectDetail {
     private int need_stu_count;
     private String people_name;
     private int status;
+
+    public int getProgress() {
+        return progress;
+    }
+
+    private int progress;
     private List<String> part_stu_name;
     private List<String> part_tea_name;
 

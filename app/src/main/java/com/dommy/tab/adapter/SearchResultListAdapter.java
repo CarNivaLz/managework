@@ -46,7 +46,7 @@ public class SearchResultListAdapter extends BaseQuickAdapter<Results,BaseViewHo
                 //进入projectdetail页面逻辑WebActivity.runActivity(mContext, model.desc, model.url);
                 switch (item.getPosition1()){
                     case 0:
-                        ProjectsDetailActivity.runActivity(mContext,item.getId());
+                        ProjectsDetailActivity.runActivity(mContext,item.getId(),item.getTittle());
                         break;
                     case 1:
                         AchievementsDetailActivity.runActivity(mContext,item.getId(),item.getPosition1());

@@ -29,7 +29,7 @@ public class ProjectsListAdapter extends BaseQuickAdapter<Projects,BaseViewHolde
             @Override
             public void onClick(View v) {
                 //进入projectdetail页面逻辑WebActivity.runActivity(mContext, model.desc, model.url);
-                ProjectsDetailActivity.runActivity(mContext,item.getId());
+                ProjectsDetailActivity.runActivity(mContext,item.getId(),item.getTittle());
             }
         });
     }
